@@ -2,8 +2,8 @@ package qxMiddleware
 
 import (
 	"context"
-	"github.com/Technology-99/third_party/commKey"
-	"github.com/Technology-99/third_party/sony"
+	"github.com/Technology-99/qxLib/qxCommonHeader"
+	"github.com/Technology-99/qxLib/qxSony"
 	"github.com/zeromicro/go-zero/core/logx"
 	"github.com/zeromicro/go-zero/rest/httpx"
 	"net/http"
@@ -61,9 +61,9 @@ func (m *PathHttpInterceptorMiddleware) Handle(next http.HandlerFunc) http.Handl
 		}
 
 		requestID := ""
-		xRequestIDFor := r.Header.Get(commKey.HeaderXRequestIDFor)
+		xRequestIDFor := r.Header.Get(qxCommonHeader.HeaderXRequestIDFor)
 		if xRequestIDFor == "" {
-			requestID = sony.NextId()
+			requestID = qxSony.NextId()
 			ctx = context.WithValue(ctx, CtxRequestID, requestID)
 		} else {
 			requestID = xRequestIDFor
@@ -74,9 +74,9 @@ func (m *PathHttpInterceptorMiddleware) Handle(next http.HandlerFunc) http.Handl
 		userAgent := r.Header.Get(CtxUserAgent)
 		ctx = context.WithValue(ctx, CtxUserAgent, userAgent)
 
-		xAccessKeyFor := r.Header.Get(commKey.HeaderXAccessKeyFor)
-		xAuthMethodFor := r.Header.Get(commKey.HeaderXAuthMethodFor)
-		xAccountFor := r.Header.Get(commKey.HeaderXAccessKeyFor)
+		xAccessKeyFor := r.Header.Get(qxCommonHeader.HeaderXAccessKeyFor)
+		xAuthMethodFor := r.Header.Get(qxCommonHeader.HeaderXAuthMethodFor)
+		xAccountFor := r.Header.Get(qxCommonHeader.HeaderXAccessKeyFor)
 		ctx = context.WithValue(ctx, CtxXAccessKeyFor, xAccessKeyFor)
 		ctx = context.WithValue(ctx, CtxXAuthMethodFor, xAuthMethodFor)
 		ctx = context.WithValue(ctx, CtxXAccountFor, xAccountFor)

@@ -2,7 +2,7 @@ package qxJwts
 
 import (
 	"fmt"
-	"github.com/Technology-99/third_party/qxCrypto"
+	"github.com/Technology-99/qxLib/qxCrypto"
 	"github.com/golang-jwt/jwt/v4"
 	"time"
 )

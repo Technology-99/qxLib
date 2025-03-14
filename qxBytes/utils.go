@@ -2,7 +2,7 @@ package qxBytes
 
 import (
 	"fmt"
-	"github.com/Technology-99/third_party/common"
+	"github.com/Technology-99/qxLib/qxCommon"
 	"sort"
 	"strconv"
 )
@@ -43,7 +43,7 @@ func CombineBytes(high, low int) int {
 }
 
 func Ten2Sixteen(param byte) int {
-	return common.Str2Int(fmt.Sprintf("0x%x", param))
+	return qxCommon.Str2Int(fmt.Sprintf("0x%x", param))
 }
 
 func Map2Bytes(data map[string]uint8) []byte {
@@ -63,7 +63,7 @@ func Map2Bytes(data map[string]uint8) []byte {
 }
 
 func Ten2sixteen2uint(param byte) uint {
-	return common.Str2Uint(fmt.Sprintf("%x", param))
+	return qxCommon.Str2Uint(fmt.Sprintf("%x", param))
 }
 
 func SplitBytes(data []byte, segmentSize int) [][]byte {

@@ -3,7 +3,6 @@ module github.com/Technology-99/qxLib
 go 1.23.0
 
 require (
-	github.com/Technology-99/third_party v0.1.38
 	github.com/gin-gonic/gin v1.9.1
 	github.com/go-playground/validator/v10 v10.14.0
 	github.com/go-sql-driver/mysql v1.9.0
