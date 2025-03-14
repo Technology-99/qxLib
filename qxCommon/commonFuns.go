@@ -1,4 +1,4 @@
-package common
+package qxCommon
 
 import (
 	"bytes"

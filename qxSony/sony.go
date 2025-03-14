@@ -1,4 +1,4 @@
-package sony
+package qxSony
 
 import (
 	"fmt"

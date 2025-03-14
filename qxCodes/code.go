@@ -1,4 +1,4 @@
-package qxEngineResponse
+package qxCodes
 
 // note: qx内部开发引擎部分状态码 1000-5999
 // note: 如果是业务上的错误码，请从10000,20000,30000,40000,50000开头

@@ -7,7 +7,7 @@
 
 *
 */
-package commKey
+package qxCommonHeader
 
 const (
 	HeaderAuthorization  = "Authorization"

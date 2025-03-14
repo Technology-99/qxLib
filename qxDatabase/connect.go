@@ -7,7 +7,7 @@
 
 *
 */
-package database
+package qxDatabase
 
 import (
 	"database/sql"

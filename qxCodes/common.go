@@ -1,4 +1,4 @@
-package qxEngineResponse
+package qxCodes
 
 const (
 	LangZhCN = "zh-CN"

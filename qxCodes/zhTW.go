@@ -1,6 +1,6 @@
-package qxEngineResponse
+package qxCodes
 
-var WrongMessageZhCN = map[int32]string{
+var WrongMessageZhTW = map[int32]string{
 	QxEngineStatusContinue:                      "继续。",
 	QxEngineStatusSwitchingProtocols:            "服务器同意客户段的协议升级请求",
 	QxEngineStatusProcessing:                    "服务器已接收请求，但是仍然在处理中",

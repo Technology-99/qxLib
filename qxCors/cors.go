@@ -1,4 +1,4 @@
-package corsHandler
+package qxCors
 
 import (
 	"net/http"

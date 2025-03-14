@@ -1,4 +1,4 @@
-package database
+package qxDatabase
 
 import (
 	"gorm.io/gorm"

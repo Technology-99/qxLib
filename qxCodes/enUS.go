@@ -1,4 +1,4 @@
-package qxEngineResponse
+package qxCodes
 
 var WrongMessageEnUS = map[int32]string{
 	QxEngineStatusContinue:                      "Continue",
