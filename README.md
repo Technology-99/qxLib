@@ -1,1 +1,1 @@
-# qxLib
+# qxLibrary
