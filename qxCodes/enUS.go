@@ -13,6 +13,8 @@ var WrongMessageEnUS = map[int32]string{
 	QxEngineStatusDisabled:                      "resource is disabled",
 	QxEngineStatusNotSetWhiteList:               "not in white list",
 	QxEngineStatusNotWhiteList:                  "ip: %s, not in white list",
+	QxEngineStatusNotFoundAuthorization:         "not found authorization",
+	QxEngineStatusNotFoundXAccessKeyFor:         "not found accesskey",
 	QxEngineStatusOK:                            "OK",
 	QxEngineStatusCreated:                       "Created",
 	QxEngineStatusAccepted:                      "Accepted",

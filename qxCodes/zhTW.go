@@ -13,6 +13,8 @@ var WrongMessageZhTW = map[int32]string{
 	QxEngineStatusDisabled:                      "资源被禁用",
 	QxEngineStatusNotSetWhiteList:               "请联系系统管理员设置ip白名单",
 	QxEngineStatusNotWhiteList:                  "ip %s, 不在白名单内",
+	QxEngineStatusNotFoundAuthorization:         "没找到验证头",
+	QxEngineStatusNotFoundXAccessKeyFor:         "没找到api密钥头",
 	QxEngineStatusOK:                            "请求成功。",
 	QxEngineStatusCreated:                       "已创建。",
 	QxEngineStatusAccepted:                      "已接受。",

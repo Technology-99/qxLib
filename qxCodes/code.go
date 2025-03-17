@@ -22,6 +22,8 @@ const (
 	QxEngineStatusDisabled                      int32 = 1009 // 语义: 资源被禁用
 	QxEngineStatusNotSetWhiteList               int32 = 1010 // 语义: 请联系系统管理员设置ip白名单
 	QxEngineStatusNotWhiteList                  int32 = 1011 // 语义: ip %s, 不在白名单内
+	QxEngineStatusNotFoundAuthorization         int32 = 1012 // 语义: 没找到验证头
+	QxEngineStatusNotFoundXAccessKeyFor         int32 = 1013 // 语义: 没找到api密钥头
 	QxEngineStatusOK                            int32 = 2000 // 语义: 请求成功。
 	QxEngineStatusCreated                       int32 = 2001 // 语义: 已创建。
 	QxEngineStatusAccepted                      int32 = 2002 // 语义: 已接受。
