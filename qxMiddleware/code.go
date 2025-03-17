@@ -1,6 +1,11 @@
 package qxMiddleware
 
 const (
+	RestRbacInterceptorMiddlewareObjectPath       = "path"
+	RestRbacInterceptorMiddlewareObjectRequestURI = "requestURI"
+)
+
+const (
 	CtxStartTime       = "StartTime"
 	CtxClientIp        = "ClientIp"
 	CtxClientPort      = "ClientPort"
