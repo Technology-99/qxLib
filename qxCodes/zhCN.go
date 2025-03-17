@@ -82,4 +82,5 @@ var WrongMessageZhCN = map[int32]string{
 	QxEngineStatusLoopDetected:                  "服务器监测到无限循环",
 	QxEngineStatusNotExtended:                   "服务器需要扩展请求",
 	QxEngineStatusNetworkAuthenticationRequired: "需要网络认证（如wifi认证页面）",
+	QxEngineStatusParserInitFailed:              "解析器初始化失败",
 }

@@ -82,4 +82,5 @@ var WrongMessageEnUS = map[int32]string{
 	QxEngineStatusLoopDetected:                  "Loop Detected",
 	QxEngineStatusNotExtended:                   "Not Extended",
 	QxEngineStatusNetworkAuthenticationRequired: "Network Authentication Required",
+	QxEngineStatusParserInitFailed:              "Parser Init Failed",
 }
