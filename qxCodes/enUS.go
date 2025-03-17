@@ -15,6 +15,7 @@ var WrongMessageEnUS = map[int32]string{
 	QxEngineStatusNotWhiteList:                  "ip: %s, not in white list",
 	QxEngineStatusNotFoundAuthorization:         "not found authorization",
 	QxEngineStatusNotFoundXAccessKeyFor:         "not found accesskey",
+	QxEngineStatusNotFoundMetadata:              "rpc request not found metadata",
 	QxEngineStatusOK:                            "OK",
 	QxEngineStatusCreated:                       "Created",
 	QxEngineStatusAccepted:                      "Accepted",

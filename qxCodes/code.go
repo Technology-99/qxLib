@@ -24,6 +24,7 @@ const (
 	QxEngineStatusNotWhiteList                  int32 = 1011 // 语义: ip %s, 不在白名单内
 	QxEngineStatusNotFoundAuthorization         int32 = 1012 // 语义: 没找到验证头
 	QxEngineStatusNotFoundXAccessKeyFor         int32 = 1013 // 语义: 没找到api密钥头
+	QxEngineStatusNotFoundMetadata              int32 = 1014 // 语义: rpc通讯没找到元数据
 	QxEngineStatusOK                            int32 = 2000 // 语义: 请求成功。
 	QxEngineStatusCreated                       int32 = 2001 // 语义: 已创建。
 	QxEngineStatusAccepted                      int32 = 2002 // 语义: 已接受。
