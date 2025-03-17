@@ -28,6 +28,7 @@ var WrongMessageZhTW = map[int32]string{
 	QxEngineStatusIMUsed:                        "服务器完成请求，但返回的是变更后的资源",
 	QxEngineStatusNotTrustDevice:                "不是可信设备",
 	QxEngineStatusAccountExists:                 "账号已经存在",
+	QxEngineStatusResourceExists:                "资源已存在",
 	QxEngineStatusMultipleChoices:               "多种选择。",
 	QxEngineStatusMovedPermanently:              "永久移动。",
 	QxEngineStatusFound:                         "临时移动。",

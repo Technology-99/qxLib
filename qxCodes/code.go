@@ -37,6 +37,7 @@ const (
 	QxEngineStatusIMUsed                        int32 = 2026 // 语义: 服务器完成请求，但返回的是变更后的资源
 	QxEngineStatusNotTrustDevice                int32 = 2027 // 语义: 不是可信设备
 	QxEngineStatusAccountExists                 int32 = 2028 // 语义: 账号已经存在
+	QxEngineStatusResourceExists                int32 = 2029 // 语义: 资源已存在
 	QxEngineStatusMultipleChoices               int32 = 3000 // 语义: 多种选择。
 	QxEngineStatusMovedPermanently              int32 = 3001 // 语义: 永久移动。
 	QxEngineStatusFound                         int32 = 3002 // 语义: 临时移动。
