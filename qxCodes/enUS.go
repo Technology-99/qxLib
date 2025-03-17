@@ -67,6 +67,7 @@ var WrongMessageEnUS = map[int32]string{
 	QxEngineStatusRequestHeaderFieldsTooLarge:   "Request Header Fields Too Large",
 	QxEngineStatusUnavailableForLegalReasons:    "Unavailable For Legal Reasons",
 	QxEngineStatusAccountOrPasswordInvalid:      "account or password invalid",
+	QxEngineStatusPermissionDenied:              "permission denied",
 	QxEngineStatusInternalServerError:           "Internal Server Error",
 	QxEngineStatusNotImplemented:                "Not Implemented",
 	QxEngineStatusBadGateway:                    "Bad Gateway",
