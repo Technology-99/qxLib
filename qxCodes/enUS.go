@@ -29,6 +29,7 @@ var WrongMessageEnUS = map[int32]string{
 	QxEngineStatusNotTrustDevice:                "not trust device",
 	QxEngineStatusAccountExists:                 "account already exists",
 	QxEngineStatusResourceExists:                "Resource already exists",
+	QxEngineStatusUnsupportedAlgorithmModel:     "Unsupported algorithm model",
 	QxEngineStatusMultipleChoices:               "Multiple Choices",
 	QxEngineStatusMovedPermanently:              "Moved Permanently",
 	QxEngineStatusFound:                         "Found",

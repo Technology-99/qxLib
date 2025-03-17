@@ -29,6 +29,7 @@ var WrongMessageZhTW = map[int32]string{
 	QxEngineStatusNotTrustDevice:                "不是可信设备",
 	QxEngineStatusAccountExists:                 "账号已经存在",
 	QxEngineStatusResourceExists:                "资源已存在",
+	QxEngineStatusUnsupportedAlgorithmModel:     "不支持的算法模型",
 	QxEngineStatusMultipleChoices:               "多种选择。",
 	QxEngineStatusMovedPermanently:              "永久移动。",
 	QxEngineStatusFound:                         "临时移动。",
