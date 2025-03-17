@@ -4,11 +4,13 @@ import (
 	"crypto/rand"
 	"crypto/rsa"
 	"crypto/sha256"
+	"crypto/sha512"
 	"crypto/x509"
 	"encoding/base64"
 	"encoding/pem"
 	"errors"
 	"fmt"
+	"hash"
 )
 
 var (
@@ -52,8 +54,64 @@ func ParseRSAPrivateKey(pemData string) (*rsa.PrivateKey, error) {
 	return privateKey, nil
 }
 
+// RSA + SHA-512 进行加密
+func RSAEncrypt(method hash.Hash, plainText []byte, publicKey *rsa.PublicKey) (string, error) {
+	encryptedData, err := rsa.EncryptOAEP(method, rand.Reader, publicKey, plainText, nil)
+	if err != nil {
+		return "", fmt.Errorf("rsa encrypt failded: %v", err)
+	}
+
+	// Base64 编码
+	return base64.StdEncoding.EncodeToString(encryptedData), nil
+}
+
+// RSA + SHA-512 进行解密
+func RSADecrypt(method hash.Hash, encryptedBase64 string, privateKey *rsa.PrivateKey) ([]byte, error) {
+	// Base64 解码
+	encryptedData, err := base64.StdEncoding.DecodeString(encryptedBase64)
+	if err != nil {
+		return nil, fmt.Errorf("Base64 decrypt: %v", err)
+	}
+
+	// 使用私钥解密
+	decryptedData, err := rsa.DecryptOAEP(method, rand.Reader, privateKey, encryptedData, nil)
+	if err != nil {
+		return nil, fmt.Errorf("rsa decrypt failed: %v", err)
+	}
+
+	return decryptedData, nil
+}
+
+// RSA + SHA-512 进行加密
+func RSAEncryptBySha512(plainText []byte, publicKey *rsa.PublicKey) (string, error) {
+	encryptedData, err := rsa.EncryptOAEP(sha512.New(), rand.Reader, publicKey, plainText, nil)
+	if err != nil {
+		return "", fmt.Errorf("rsa encrypt failded: %v", err)
+	}
+
+	// Base64 编码
+	return base64.StdEncoding.EncodeToString(encryptedData), nil
+}
+
+// RSA + SHA-512 进行解密
+func RSADecryptBySha512(encryptedBase64 string, privateKey *rsa.PrivateKey) ([]byte, error) {
+	// Base64 解码
+	encryptedData, err := base64.StdEncoding.DecodeString(encryptedBase64)
+	if err != nil {
+		return nil, fmt.Errorf("Base64 decrypt: %v", err)
+	}
+
+	// 使用私钥解密
+	decryptedData, err := rsa.DecryptOAEP(sha512.New(), rand.Reader, privateKey, encryptedData, nil)
+	if err != nil {
+		return nil, fmt.Errorf("rsa decrypt failed: %v", err)
+	}
+
+	return decryptedData, nil
+}
+
 // RSA + SHA-256 进行加密
-func RSAEncrypt(plainText []byte, publicKey *rsa.PublicKey) (string, error) {
+func RSAEncryptBySha256(plainText []byte, publicKey *rsa.PublicKey) (string, error) {
 	encryptedData, err := rsa.EncryptOAEP(sha256.New(), rand.Reader, publicKey, plainText, nil)
 	if err != nil {
 		return "", fmt.Errorf("rsa encrypt failded: %v", err)
@@ -64,7 +122,7 @@ func RSAEncrypt(plainText []byte, publicKey *rsa.PublicKey) (string, error) {
 }
 
 // RSA + SHA-256 进行解密
-func RSADecrypt(encryptedBase64 string, privateKey *rsa.PrivateKey) ([]byte, error) {
+func RSADecryptBySha256(encryptedBase64 string, privateKey *rsa.PrivateKey) ([]byte, error) {
 	// Base64 解码
 	encryptedData, err := base64.StdEncoding.DecodeString(encryptedBase64)
 	if err != nil {
