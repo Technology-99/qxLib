@@ -71,6 +71,7 @@ var WrongMessageEnUS = map[int32]string{
 	QxEngineStatusUnavailableForLegalReasons:    "Unavailable For Legal Reasons",
 	QxEngineStatusAccountOrPasswordInvalid:      "account or password invalid",
 	QxEngineStatusPermissionDenied:              "permission denied",
+	QxEngineStatusNotStandardBase64Format:       "Not in standard base64 format",
 	QxEngineStatusInternalServerError:           "Internal Server Error",
 	QxEngineStatusNotImplemented:                "Not Implemented",
 	QxEngineStatusBadGateway:                    "Bad Gateway",

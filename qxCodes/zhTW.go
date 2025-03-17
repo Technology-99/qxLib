@@ -71,6 +71,7 @@ var WrongMessageZhTW = map[int32]string{
 	QxEngineStatusUnavailableForLegalReasons:    "由于法律原因，资源不可用",
 	QxEngineStatusAccountOrPasswordInvalid:      "账号或者密码错误",
 	QxEngineStatusPermissionDenied:              "权限不足",
+	QxEngineStatusNotStandardBase64Format:       "不是标准的base64格式",
 	QxEngineStatusInternalServerError:           "服务器内部错误，无法完成请求",
 	QxEngineStatusNotImplemented:                "服务器不支持请求的功能，无法完成请求",
 	QxEngineStatusBadGateway:                    "作为网关或者代理工作的服务器尝试执行请求时，从远程服务器接收到了一个无效的响应",
