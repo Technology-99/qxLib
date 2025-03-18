@@ -25,6 +25,7 @@ const (
 	QxEngineStatusNotFoundAuthorization         int32 = 1012 // 语义: 没找到验证头
 	QxEngineStatusNotFoundXAccessKeyFor         int32 = 1013 // 语义: 没找到api密钥头
 	QxEngineStatusNotFoundMetadata              int32 = 1014 // 语义: rpc通讯没找到元数据
+	QxEngineStatusKeyChangeExpired              int32 = 1015 // 语义: 密钥交换已过期
 	QxEngineStatusOK                            int32 = 2000 // 语义: 请求成功。
 	QxEngineStatusCreated                       int32 = 2001 // 语义: 已创建。
 	QxEngineStatusAccepted                      int32 = 2002 // 语义: 已接受。
@@ -94,5 +95,5 @@ const (
 	QxEngineStatusNotExtended                   int32 = 5010 // 语义: 服务器需要扩展请求
 	QxEngineStatusNetworkAuthenticationRequired int32 = 5011 // 语义: 需要网络认证（如wifi认证页面）
 	QxEngineStatusParserInitFailed              int32 = 5012 // 语义: 解析器初始化失败
-	QxEngineStatusServerEcdhUnSupported         int32 = 0    // 语义: 服务器不支持ecdh
+	QxEngineStatusServerEcdhUnSupported         int32 = 5013 // 语义: 服务器不支持ecdh
 )

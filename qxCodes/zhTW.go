@@ -16,6 +16,7 @@ var WrongMessageZhTW = map[int32]string{
 	QxEngineStatusNotFoundAuthorization:         "没找到验证头",
 	QxEngineStatusNotFoundXAccessKeyFor:         "没找到api密钥头",
 	QxEngineStatusNotFoundMetadata:              "rpc通讯没找到元数据",
+	QxEngineStatusKeyChangeExpired:              "密钥交换已过期",
 	QxEngineStatusOK:                            "请求成功。",
 	QxEngineStatusCreated:                       "已创建。",
 	QxEngineStatusAccepted:                      "已接受。",
