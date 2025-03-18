@@ -72,6 +72,7 @@ var WrongMessageEnUS = map[int32]string{
 	QxEngineStatusAccountOrPasswordInvalid:      "account or password invalid",
 	QxEngineStatusPermissionDenied:              "permission denied",
 	QxEngineStatusNotStandardBase64Format:       "Not in standard base64 format",
+	QxEngineStatusKmsNotInit:                    "The tenant's kms has not yet been initialized",
 	QxEngineStatusInternalServerError:           "Internal Server Error",
 	QxEngineStatusNotImplemented:                "Not Implemented",
 	QxEngineStatusBadGateway:                    "Bad Gateway",
