@@ -94,4 +94,5 @@ const (
 	QxEngineStatusNotExtended                   int32 = 5010 // 语义: 服务器需要扩展请求
 	QxEngineStatusNetworkAuthenticationRequired int32 = 5011 // 语义: 需要网络认证（如wifi认证页面）
 	QxEngineStatusParserInitFailed              int32 = 5012 // 语义: 解析器初始化失败
+	QxEngineStatusServerEcdhUnSupported         int32 = 0    // 语义: 服务器不支持ecdh
 )

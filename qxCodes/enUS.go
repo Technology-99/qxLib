@@ -85,4 +85,5 @@ var WrongMessageEnUS = map[int32]string{
 	QxEngineStatusNotExtended:                   "Not Extended",
 	QxEngineStatusNetworkAuthenticationRequired: "Network Authentication Required",
 	QxEngineStatusParserInitFailed:              "Parser Init Failed",
+	QxEngineStatusServerEcdhUnSupported:         "ecdh not supported",
 }

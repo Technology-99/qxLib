@@ -85,4 +85,5 @@ var WrongMessageZhCN = map[int32]string{
 	QxEngineStatusNotExtended:                   "服务器需要扩展请求",
 	QxEngineStatusNetworkAuthenticationRequired: "需要网络认证（如wifi认证页面）",
 	QxEngineStatusParserInitFailed:              "解析器初始化失败",
+	QxEngineStatusServerEcdhUnSupported:         "服务器不支持ecdh",
 }
