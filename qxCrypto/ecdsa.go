@@ -69,7 +69,7 @@ func ECDSAGenerateKeys(curve elliptic.Curve) (privateKey *ecdsa.PrivateKey, publ
 }
 
 // note: 生成 ECC 证书
-func ECDSAGenerateECCCertificate(curve elliptic.Curve, subject pkix.Name) (certPem, keyPem []byte, err error) {
+func ECDSAGenerateECCCertificate(curve elliptic.Curve, subject pkix.Name) (keyPem, certPem []byte, err error) {
 	privateKey, publicKey, err := ECDSAGenerateKeys(curve)
 	if err != nil {
 		return nil, nil, err
@@ -99,5 +99,5 @@ func ECDSAGenerateECCCertificate(curve elliptic.Curve, subject pkix.Name) (certP
 	keyPEMBytes, _ := x509.MarshalECPrivateKey(privateKey)
 	keyPEMBytes = pem.EncodeToMemory(&pem.Block{Type: "EC PRIVATE KEY", Bytes: keyPEMBytes})
 
-	return certPEMBytes, keyPEMBytes, nil
+	return keyPEMBytes, certPEMBytes, nil
 }
