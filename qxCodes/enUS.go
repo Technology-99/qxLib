@@ -31,6 +31,7 @@ var WrongMessageEnUS = map[int32]string{
 	QxEngineStatusAccountExists:                 "account already exists",
 	QxEngineStatusResourceExists:                "Resource already exists",
 	QxEngineStatusUnsupportedAlgorithmModel:     "Unsupported algorithm model",
+	QxEngineStatusUnsupportedSignMethod:         "Unsupported sign method",
 	QxEngineStatusMultipleChoices:               "Multiple Choices",
 	QxEngineStatusMovedPermanently:              "Moved Permanently",
 	QxEngineStatusFound:                         "Found",

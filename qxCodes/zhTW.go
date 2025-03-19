@@ -31,6 +31,7 @@ var WrongMessageZhTW = map[int32]string{
 	QxEngineStatusAccountExists:                 "账号已经存在",
 	QxEngineStatusResourceExists:                "资源已存在",
 	QxEngineStatusUnsupportedAlgorithmModel:     "不支持的算法模型",
+	QxEngineStatusUnsupportedSignMethod:         "不支持的签名算法",
 	QxEngineStatusMultipleChoices:               "多种选择。",
 	QxEngineStatusMovedPermanently:              "永久移动。",
 	QxEngineStatusFound:                         "临时移动。",
