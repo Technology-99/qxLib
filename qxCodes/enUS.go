@@ -17,6 +17,7 @@ var WrongMessageEnUS = map[int32]string{
 	QxEngineStatusNotFoundXAccessKeyFor:         "not found accesskey",
 	QxEngineStatusNotFoundMetadata:              "rpc request not found metadata",
 	QxEngineStatusKeyChangeExpired:              "key change expired",
+	QxEngineStatusTokenNotActiveYet:             "token not active yet",
 	QxEngineStatusOK:                            "OK",
 	QxEngineStatusCreated:                       "Created",
 	QxEngineStatusAccepted:                      "Accepted",

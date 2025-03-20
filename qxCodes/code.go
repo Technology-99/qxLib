@@ -26,6 +26,7 @@ const (
 	QxEngineStatusNotFoundXAccessKeyFor         int32 = 1013 // 语义: 没找到api密钥头
 	QxEngineStatusNotFoundMetadata              int32 = 1014 // 语义: rpc通讯没找到元数据
 	QxEngineStatusKeyChangeExpired              int32 = 1015 // 语义: 密钥交换已过期
+	QxEngineStatusTokenNotActiveYet             int32 = 1016 // 语义: 凭证尚未激活
 	QxEngineStatusOK                            int32 = 2000 // 语义: 请求成功。
 	QxEngineStatusCreated                       int32 = 2001 // 语义: 已创建。
 	QxEngineStatusAccepted                      int32 = 2002 // 语义: 已接受。
