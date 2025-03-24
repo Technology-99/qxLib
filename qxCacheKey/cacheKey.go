@@ -34,4 +34,6 @@ const (
 
 	DOUYIN_JSAPI_TICKET_KEY_CRON = "%s:jsApiTicket-TID%d-key-%s"
 	DOUYIN_TICKET_APPID_CRON     = "%s:dy-ticket-%s"
+
+	KeyChangeCacheKey = "%s-cache-key-%s"
 )
