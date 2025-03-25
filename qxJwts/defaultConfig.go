@@ -6,4 +6,5 @@ type QxJwtDefaultConfigWithKms struct {
 	SignMethod        string `json:",default=ES384"`
 	OnlineExp         int    `json:",default=300"`
 	DataEncryptName   string `json:",default=default"`
+	DataEncryptMethod string `json:",default=AES-256-GCM"`
 }
