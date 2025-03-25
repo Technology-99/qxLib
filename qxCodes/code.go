@@ -86,6 +86,7 @@ const (
 	QxEngineStatusNotStandardBase64Format       int32 = 4054 // 语义: 不是标准的base64格式
 	QxEngineStatusKmsNotInit                    int32 = 4055 // 语义: 租户的kms尚未完成初始化
 	QxEngineStatusFunctionUnavailable           int32 = 4056 // 语义: 功能不可用
+	QxEngineStatusCodeInvalid                   int32 = 4057 // 语义: 验证码错误
 	QxEngineStatusInternalServerError           int32 = 5000 // 语义: 服务器内部错误，无法完成请求
 	QxEngineStatusNotImplemented                int32 = 5001 // 语义: 服务器不支持请求的功能，无法完成请求
 	QxEngineStatusBadGateway                    int32 = 5002 // 语义: 作为网关或者代理工作的服务器尝试执行请求时，从远程服务器接收到了一个无效的响应
