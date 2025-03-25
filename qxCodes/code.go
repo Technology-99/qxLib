@@ -27,6 +27,9 @@ const (
 	QxEngineStatusNotFoundMetadata              int32 = 1014 // 语义: rpc通讯没找到元数据
 	QxEngineStatusKeyChangeExpired              int32 = 1015 // 语义: 密钥交换已过期
 	QxEngineStatusTokenNotActiveYet             int32 = 1016 // 语义: 凭证尚未激活
+	QxEngineStatusSecurityTokenInvalid          int32 = 1017 // 语义: 安全令牌错误
+	QxEngineStatusSecurityTokenExpired          int32 = 1018 // 语义: 安全令牌过期
+	QxEngineStatusAccountOrPwdInvalid           int32 = 1019 // 语义: 账号或密码错误
 	QxEngineStatusOK                            int32 = 2000 // 语义: 请求成功。
 	QxEngineStatusCreated                       int32 = 2001 // 语义: 已创建。
 	QxEngineStatusAccepted                      int32 = 2002 // 语义: 已接受。
