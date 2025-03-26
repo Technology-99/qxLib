@@ -96,11 +96,11 @@ func (d *defaultRedisDao) SetExCtx(ctx context.Context, key string, value interf
 }
 
 func (d *defaultRedisDao) GetCtx(ctx context.Context, key string) (string, error) {
-	rdCmd := d.rd.Get(ctx, key)
-	if err := rdCmd.Err(); err != nil {
+	rdCmd, err := d.rd.Get(ctx, key).Result()
+	if err != nil {
 		return "", err
 	}
-	return rdCmd.String(), nil
+	return rdCmd, nil
 }
 
 func (d *defaultRedisDao) Get(key string) (string, error) {
