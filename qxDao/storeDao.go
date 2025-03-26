@@ -2,7 +2,9 @@ package qxDao
 
 import (
 	"context"
+	"github.com/Technology-99/qxLib/qxStore"
 	"github.com/redis/go-redis/v9"
+	"log"
 	"time"
 )
 
@@ -21,6 +23,17 @@ type (
 		rd *redis.Client
 	}
 )
+
+func NewRedisDaoWithRdConfig(rc *qxStore.RedisConfig) RedisDao {
+	rdClient, err := qxStore.NewRedisClient(rc)
+	if err != nil {
+		log.Fatalf("connect redis store error: %v", err)
+		return nil
+	}
+	return &defaultRedisDao{
+		rd: rdClient,
+	}
+}
 
 func NewRedisDao(rd *redis.Client) RedisDao {
 	return &defaultRedisDao{
