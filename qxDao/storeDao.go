@@ -15,7 +15,7 @@ type (
 		Close() error
 		Set(ctx context.Context, key string, value interface{}) error
 		SetEx(ctx context.Context, key string, value interface{}, seconds int) error
-		Get(ctx context.Context, key string, value interface{}, expiration time.Duration) (string, error)
+		Get(ctx context.Context, key string) (string, error)
 		NewWatcher(ctx context.Context, channel string, fn func(msg *redis.Message)) error
 		Publish(ctx context.Context, channel string, msg string) error
 	}
@@ -76,7 +76,7 @@ func (d *defaultRedisDao) SetEx(ctx context.Context, key string, value interface
 	return nil
 }
 
-func (d *defaultRedisDao) Get(ctx context.Context, key string, value interface{}, expiration time.Duration) (string, error) {
+func (d *defaultRedisDao) Get(ctx context.Context, key string) (string, error) {
 	rdCmd := d.rd.Get(ctx, key)
 	if err := rdCmd.Err(); err != nil {
 		return "", err
