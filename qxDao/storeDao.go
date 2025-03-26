@@ -2,6 +2,7 @@ package qxDao
 
 import (
 	"context"
+	"errors"
 	"github.com/Technology-99/qxLib/qxStore"
 	"github.com/redis/go-redis/v9"
 	"log"
@@ -96,11 +97,13 @@ func (d *defaultRedisDao) SetExCtx(ctx context.Context, key string, value interf
 }
 
 func (d *defaultRedisDao) GetCtx(ctx context.Context, key string) (string, error) {
-	rdCmd, err := d.rd.Get(ctx, key).Result()
-	if err != nil {
+	if val, err := d.rd.Get(ctx, key).Result(); errors.Is(err, redis.Nil) {
+		return "", nil
+	} else if err != nil {
 		return "", err
+	} else {
+		return val, nil
 	}
-	return rdCmd, nil
 }
 
 func (d *defaultRedisDao) Get(key string) (string, error) {
