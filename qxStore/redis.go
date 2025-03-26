@@ -1,6 +1,7 @@
 package qxStore
 
 import (
+	"crypto/tls"
 	"encoding/base64"
 	"errors"
 	"github.com/redis/go-redis/v9"
@@ -20,6 +21,12 @@ const (
 	readWriteTimeout     = 2 * time.Second
 	defaultSlowThreshold = time.Millisecond * 100
 	defaultPingTimeout   = time.Second
+)
+
+const (
+	defaultDatabase = 0
+	maxRetries      = 3
+	idleConns       = 8
 )
 
 var (
@@ -57,12 +64,22 @@ func NewRedisClient(rc *RedisConfig) (*redis.Client, error) {
 		return nil, err
 	}
 
+	var tlsConfig *tls.Config
+	if rc.tls {
+		tlsConfig = &tls.Config{
+			InsecureSkipVerify: true,
+		}
+	}
+
 	opts := redis.Options{
 		Addr:         rc.Host,              // Redis 地址
 		Password:     string(decodedBytes), // 没有密码则留空
 		DB:           rc.DB,                // 默认 DB
 		ReadTimeout:  readWriteTimeout,
 		WriteTimeout: readWriteTimeout,
+		MaxRetries:   maxRetries,
+		MinIdleConns: idleConns,
+		TLSConfig:    tlsConfig,
 	}
 	//if rc.tls {
 	//	opts.TLSConfig = &tls.Config{}
