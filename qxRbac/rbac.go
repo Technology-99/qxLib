@@ -1,6 +1,7 @@
 package qxRbac
 
 import (
+	"encoding/base64"
 	"errors"
 	"github.com/Technology-99/qxLib/qxStore"
 	rediswatcher "github.com/billcobbler/casbin-redis-watcher/v2"
@@ -8,6 +9,7 @@ import (
 	"github.com/casbin/casbin/v2/persist"
 	gormadapter "github.com/casbin/gorm-adapter/v3"
 	"gorm.io/gorm"
+	"log"
 )
 
 const (
@@ -135,7 +137,12 @@ func (engine *CasbinEngine) CustomFilterNewWatcher(filters []gormadapter.Filter)
 }
 
 func (engine *CasbinEngine) NewWatcher() *CasbinEngine {
-	watcher, err := rediswatcher.NewWatcher(engine.Redis.Host, rediswatcher.Password(engine.Redis.Pass), rediswatcher.Channel(engine.RbacChannel))
+	decodedBytes, err := base64.StdEncoding.DecodeString(engine.Redis.Pass)
+	if err != nil {
+		log.Fatalln("base64 decode error:", err)
+		return nil
+	}
+	watcher, err := rediswatcher.NewWatcher(engine.Redis.Host, rediswatcher.Password(string(decodedBytes)), rediswatcher.Channel(engine.RbacChannel))
 	if err != nil {
 		panic(err)
 	}
