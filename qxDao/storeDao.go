@@ -8,13 +8,14 @@ import (
 
 type (
 	RedisDao interface {
-		GetDB() *redis.Client
+		GetRD() *redis.Client
 		Ping() error
 		Close() error
 		Set(ctx context.Context, key string, value interface{}) error
 		SetEx(ctx context.Context, key string, value interface{}, seconds int) error
 		Get(ctx context.Context, key string, value interface{}, expiration time.Duration) (string, error)
 		NewWatcher(ctx context.Context, channel string, fn func(msg *redis.Message)) error
+		Publish(ctx context.Context, channel string, msg string) error
 	}
 	defaultRedisDao struct {
 		rd *redis.Client
@@ -27,7 +28,7 @@ func NewRedisDao(rd *redis.Client) RedisDao {
 	}
 }
 
-func (d *defaultRedisDao) GetDB() *redis.Client {
+func (d *defaultRedisDao) GetRD() *redis.Client {
 	return d.rd
 }
 
@@ -76,6 +77,13 @@ func (d *defaultRedisDao) NewWatcher(ctx context.Context, channel string, fn fun
 	for msg := range ch {
 		// 处理消息
 		fn(msg)
+	}
+	return nil
+}
+
+func (d *defaultRedisDao) Publish(ctx context.Context, channel string, msg string) error {
+	if err := d.rd.Publish(ctx, channel, msg).Err(); err != nil {
+		return err
 	}
 	return nil
 }
