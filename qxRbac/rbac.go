@@ -2,11 +2,11 @@ package qxRbac
 
 import (
 	"errors"
+	"github.com/Technology-99/qxLib/qxStore"
 	rediswatcher "github.com/billcobbler/casbin-redis-watcher/v2"
 	"github.com/casbin/casbin/v2"
 	"github.com/casbin/casbin/v2/persist"
 	gormadapter "github.com/casbin/gorm-adapter/v3"
-	"github.com/zeromicro/go-zero/core/stores/redis"
 	"gorm.io/gorm"
 )
 
@@ -24,13 +24,13 @@ type CasbinEngine struct {
 	UpdateCallback   func(*casbin.Enforcer, string)
 	IsFiltered       bool
 	Filter           []gormadapter.Filter
-	Redis            *redis.RedisKeyConf
+	Redis            *qxStore.RedisConfig
 	Db               *gorm.DB
 	Enforcer         *casbin.Enforcer
 	Watcher          persist.Watcher
 }
 
-func EasyNewCasbinEngine(RbacPath, RbacChannel string, redis *redis.RedisKeyConf, db *gorm.DB, v ...any) *CasbinEngine {
+func EasyNewCasbinEngine(RbacPath, RbacChannel string, redis *qxStore.RedisConfig, db *gorm.DB, v ...any) *CasbinEngine {
 	if RbacPath == "" {
 		panic("CasbinEngine RbacPath is nil")
 	}
