@@ -1,7 +1,7 @@
 package qxCacheKey
 
 const (
-	OnlineKey = "%s-online-%s"
+	OnlineKey = "%s:online-%s"
 
 	ACCESS_TOKEN_KEY = "%s:accessToken-%s"
 
