@@ -28,7 +28,7 @@ func SonyNextId(node uint16) string {
 // note: Twitter雪花算法的golang实现
 // note: https://github.com/bwmarrin/snowflake
 func TwitterSony(nodeCode int64) (string, error) {
-	node, err := snowflake.NewNode(3)
+	node, err := snowflake.NewNode(nodeCode)
 	if err != nil {
 		return "", err
 	}
