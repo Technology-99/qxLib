@@ -63,6 +63,25 @@ func PrintMemoryUsage() {
 	log.Printf("NumGC: %v\n", m.NumGC)                   // 垃圾回收的次数
 }
 
+func FlatToNested(input map[string]interface{}) map[string]interface{} {
+	nested := make(map[string]interface{})
+	for key, value := range input {
+		parts := strings.Split(key, ".")
+		current := nested
+		for i, part := range parts {
+			if i == len(parts)-1 {
+				current[part] = value
+			} else {
+				if _, ok := current[part]; !ok {
+					current[part] = make(map[string]interface{})
+				}
+				current = current[part].(map[string]interface{})
+			}
+		}
+	}
+	return nested
+}
+
 func MaskPhoneWithRegex(phone string) string {
 	// 匹配区号的正则：支持 "+数字 " 格式
 	re := regexp.MustCompile(`^\+[\d]+\s`)
