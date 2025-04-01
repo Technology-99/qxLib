@@ -29,7 +29,7 @@ func DefaultMpsRecord() MpsRecord {
 	return MpsRecord{
 		IsShow: false,
 		Icon:   "https://corecdn.csvw88.com/statics/gov/mps.png",
-		Href:   "https://beian.miit.gov.cn/",
+		Href:   "https://beian.mps.gov.cn/",
 		Text:   "X公网安备 00000000000000号",
 	}
 }
