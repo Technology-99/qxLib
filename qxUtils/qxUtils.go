@@ -9,7 +9,7 @@ type ICPRecord struct {
 	Text   string `json:"text"`
 }
 
-func (r *ICPRecord) Default() ICPRecord {
+func DefaultICPRecord() ICPRecord {
 	return ICPRecord{
 		IsShow: false,
 		Icon:   "https://corecdn.csvw88.com/statics/gov/icp.gif",
@@ -25,7 +25,7 @@ type MpsRecord struct {
 	Text   string `json:"text"`
 }
 
-func (r *MpsRecord) Default() MpsRecord {
+func DefaultMpsRecord() MpsRecord {
 	return MpsRecord{
 		IsShow: false,
 		Icon:   "https://corecdn.csvw88.com/statics/gov/mps.png",
