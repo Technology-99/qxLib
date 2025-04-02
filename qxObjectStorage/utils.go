@@ -82,9 +82,6 @@ func (t *defaultOSTool) CopyToBucket(ctx context.Context, sourceBucket string, d
 func (t *defaultOSTool) CreateBucket(ctx context.Context, name string, region string) error {
 	_, err := t.client.CreateBucket(ctx, &s3.CreateBucketInput{
 		Bucket: aws.String(name),
-		CreateBucketConfiguration: &types.CreateBucketConfiguration{
-			LocationConstraint: types.BucketLocationConstraint(region),
-		},
 	})
 	if err != nil {
 		var owned *types.BucketAlreadyOwnedByYou
