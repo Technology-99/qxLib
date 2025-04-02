@@ -9,28 +9,6 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-const (
-	ObjectStorageTypeMinio = "minio"
-	ObjectStorageTypeCos   = "cos"
-	ObjectStorageTypeOss   = "oss"
-	ObjectStorageTypeS3    = "s3"
-)
-
-var ObjectStorageTypeSupport = map[string]bool{
-	ObjectStorageTypeMinio: true,
-	ObjectStorageTypeCos:   true,
-	ObjectStorageTypeOss:   true,
-	ObjectStorageTypeS3:    true,
-}
-
-func CheckObjectStorageSupport(osType string) bool {
-	if _, ok := ObjectStorageTypeSupport[osType]; ok {
-		return true
-	} else {
-		return false
-	}
-}
-
 func NewCustomS3Client(ctx context.Context, osType string, AccessKey, AccessSecret, Region, AccessEndpoint string) (*s3.Client, error) {
 	customResolver := aws.EndpointResolverWithOptionsFunc(func(service, region string, options ...interface{}) (aws.Endpoint, error) {
 		return aws.Endpoint{
