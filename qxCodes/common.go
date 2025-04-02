@@ -7,11 +7,11 @@ const (
 )
 
 func StatusText(code int32, v ...any) string {
-	lang := "zh"
+	lang := "zh-CN"
 	if len(v) > 0 {
 		lang = v[0].(string)
 		if lang == "" || len(lang) <= 0 {
-			lang = "zh"
+			lang = "zh-CN"
 		}
 	}
 	switch lang {

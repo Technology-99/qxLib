@@ -21,6 +21,7 @@ var WrongMessageZhCN = map[int32]string{
 	QxEngineStatusSecurityTokenInvalid:          "安全令牌错误",
 	QxEngineStatusSecurityTokenExpired:          "安全令牌过期",
 	QxEngineStatusAccountOrPwdInvalid:           "账号或密码错误",
+	QxEngineStatusSasServiceNotBootstrap:        "存储中心尚未完成初始化",
 	QxEngineStatusOK:                            "请求成功。",
 	QxEngineStatusCreated:                       "已创建。",
 	QxEngineStatusAccepted:                      "已接受。",

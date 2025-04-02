@@ -30,6 +30,7 @@ const (
 	QxEngineStatusSecurityTokenInvalid          int32 = 1017 // 语义: 安全令牌错误
 	QxEngineStatusSecurityTokenExpired          int32 = 1018 // 语义: 安全令牌过期
 	QxEngineStatusAccountOrPwdInvalid           int32 = 1019 // 语义: 账号或密码错误
+	QxEngineStatusSasServiceNotBootstrap        int32 = 1020 // 语义: 存储中心尚未完成初始化
 	QxEngineStatusOK                            int32 = 2000 // 语义: 请求成功。
 	QxEngineStatusCreated                       int32 = 2001 // 语义: 已创建。
 	QxEngineStatusAccepted                      int32 = 2002 // 语义: 已接受。
