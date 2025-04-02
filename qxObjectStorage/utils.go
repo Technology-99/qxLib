@@ -54,37 +54,6 @@ func (t *defaultOSTool) GetClient() *s3.Client {
 	return t.client
 }
 
-func (t *defaultOSTool) FormatBucketDomainByOsType(OsType string, name, region string, v ...any) (BucketInternetDomain, BucketInternalDomain, BucketAccelerateDomain string) {
-	customDomain := ""
-	if len(v) > 0 {
-		customDomain = v[0].(string)
-		if customDomain == "" || len(customDomain) <= 0 {
-			customDomain = ""
-		}
-	}
-	switch OsType {
-	case ObjectStorageTypeCos:
-		BucketInternetDomain = fmt.Sprintf("%s.cos.%s.myqcloud.com", name, region)
-		BucketInternalDomain = fmt.Sprintf("%s.cos.%s.myqcloud.com", name, region)
-		BucketAccelerateDomain = fmt.Sprintf("%s.cos.%s.myqcloud.com", name, region)
-	case ObjectStorageTypeOss:
-		BucketInternetDomain = fmt.Sprintf("%s.oss-%s.aliyuncs.com", name, region)
-		BucketInternalDomain = fmt.Sprintf("%s.oss-%s-internal.com", name, region)
-		BucketAccelerateDomain = fmt.Sprintf("%s.oss-accelerate.aliyuncs.com", name)
-	case ObjectStorageTypeS3:
-		BucketInternetDomain = fmt.Sprintf("%s.s3.%s.amazonaws.com", name, region)
-		BucketInternalDomain = fmt.Sprintf("%s.s3.%s.amazonaws.com", name, region)
-		BucketAccelerateDomain = fmt.Sprintf("%s.s3.%s.amazonaws.com", name, region)
-	case ObjectStorageTypeMinio:
-		BucketInternetDomain = fmt.Sprintf("%s.%s", name, customDomain)
-		BucketInternalDomain = fmt.Sprintf("%s.%s", name, customDomain)
-		BucketAccelerateDomain = fmt.Sprintf("%s.%s", name, customDomain)
-	default:
-		log.Printf("Unsupported bucket type %s.\n", OsType)
-	}
-	return BucketInternetDomain, BucketInternalDomain, BucketAccelerateDomain
-}
-
 // CopyToBucket copies an object in a bucket to another bucket.
 func (t *defaultOSTool) CopyToBucket(ctx context.Context, sourceBucket string, destinationBucket string, objectKey string) error {
 	_, err := t.client.CopyObject(ctx, &s3.CopyObjectInput{
