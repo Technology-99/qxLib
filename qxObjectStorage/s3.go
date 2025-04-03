@@ -2,7 +2,6 @@ package qxObjectStorage
 
 import (
 	"context"
-	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/credentials"
@@ -21,11 +20,9 @@ func NewCustomS3Client(ctx context.Context, osType string, AccessKey, AccessSecr
 	cfg, err := config.LoadDefaultConfig(ctx,
 		config.WithCredentialsProvider(credentials.NewStaticCredentialsProvider(AccessKey, AccessSecret, "")), config.WithEndpointResolverWithOptions(customResolver),
 	)
-	fmt.Println("Region loaded:", cfg.Region)
 	if cfg.Region == "" {
 		cfg.Region = Region
 	}
-	fmt.Println("Region loaded:", cfg.Region)
 	if err != nil {
 		logx.Errorf("LoadDefaultConfig error: %v", err)
 		return nil, err
