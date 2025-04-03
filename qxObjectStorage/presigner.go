@@ -53,6 +53,7 @@ func (p *defaultPresigner) GetObject(ctx context.Context, bucketName string, obj
 	if err != nil {
 		log.Printf("Couldn't get a presigned request to get %v:%v. Here's why: %v\n",
 			bucketName, objectKey, err)
+		return nil, err
 	}
 	return request, err
 }
@@ -69,6 +70,7 @@ func (p *defaultPresigner) PutObject(ctx context.Context, bucketName string, obj
 	if err != nil {
 		log.Printf("Couldn't get a presigned request to put %v:%v. Here's why: %v\n",
 			bucketName, objectKey, err)
+		return nil, err
 	}
 	return request, err
 }
@@ -81,6 +83,7 @@ func (p *defaultPresigner) DeleteObject(ctx context.Context, bucketName string, 
 	})
 	if err != nil {
 		log.Printf("Couldn't get a presigned request to delete object %v. Here's why: %v\n", objectKey, err)
+		return nil, err
 	}
 	return request, err
 }
@@ -94,6 +97,7 @@ func (p *defaultPresigner) PresignPostObject(ctx context.Context, bucketName str
 	})
 	if err != nil {
 		log.Printf("Couldn't get a presigned post request to put %v:%v. Here's why: %v\n", bucketName, objectKey, err)
+		return nil, err
 	}
 	return request, nil
 }
@@ -107,6 +111,7 @@ func (p *defaultPresigner) PresignPutObject(ctx context.Context, bucketName stri
 	})
 	if err != nil {
 		log.Printf("Couldn't get a presigned post request to put %v:%v. Here's why: %v\n", bucketName, objectKey, err)
+		return nil, err
 	}
 	return request, nil
 }
