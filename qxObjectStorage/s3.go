@@ -21,7 +21,10 @@ func NewCustomS3Client(ctx context.Context, osType string, AccessKey, AccessSecr
 	cfg, err := config.LoadDefaultConfig(ctx,
 		config.WithCredentialsProvider(credentials.NewStaticCredentialsProvider(AccessKey, AccessSecret, "")), config.WithEndpointResolverWithOptions(customResolver),
 	)
-	cfg.Region = Region
+	fmt.Println("Region loaded:", cfg.Region)
+	if cfg.Region == "" {
+		cfg.Region = Region
+	}
 	fmt.Println("Region loaded:", cfg.Region)
 	if err != nil {
 		logx.Errorf("LoadDefaultConfig error: %v", err)
