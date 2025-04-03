@@ -20,6 +20,7 @@ type (
 	OSTool interface {
 		GetPresigner() Presigner
 		GetClient() *s3.Client
+		GetActions() Actions
 		CopyToBucket(ctx context.Context, sourceBucket string, destinationBucket string, objectKey string) error
 		CreateBucket(ctx context.Context, name string, region string) error
 		DeleteBucket(ctx context.Context, bucketName string) error
@@ -52,6 +53,10 @@ func (t *defaultOSTool) GetPresigner() Presigner {
 
 func (t *defaultOSTool) GetClient() *s3.Client {
 	return t.client
+}
+
+func (t *defaultOSTool) GetActions() Actions {
+	return t.actions
 }
 
 // CopyToBucket copies an object in a bucket to another bucket.

@@ -18,6 +18,7 @@ import (
 	"mime/multipart"
 	"net"
 	"net/http"
+	"net/url"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -39,6 +40,30 @@ var (
 		Timeout: 30 * time.Second,
 	}
 )
+
+func ExtractPath(rawURL string) (string, error) {
+	parsedURL, err := url.Parse(rawURL)
+	if err != nil {
+		return "", fmt.Errorf("URL parse error: %w", err)
+	}
+	return parsedURL.Path, nil
+}
+
+func ExtractScheme(rawURL string) (string, error) {
+	parsedURL, err := url.Parse(rawURL)
+	if err != nil {
+		return "", fmt.Errorf("URL parse error: %w", err)
+	}
+	return parsedURL.Scheme, nil
+}
+
+func ExtractDomain(rawURL string) (string, error) {
+	parsedURL, err := url.Parse(rawURL)
+	if err != nil {
+		return "", fmt.Errorf("URL parse error: %w", err)
+	}
+	return parsedURL.Hostname(), nil
+}
 
 func GenerateClientId() string {
 	return GenerateRandHex(8)
