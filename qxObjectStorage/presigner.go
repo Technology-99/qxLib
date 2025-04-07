@@ -23,6 +23,7 @@ type (
 		DeleteObject(ctx context.Context, bucketName string, objectKey string) (*v4.PresignedHTTPRequest, error)
 		PresignPostObject(ctx context.Context, bucketName string, objectKey string, lifetimeSecs int64) (*s3.PresignedPostRequest, error)
 		PresignPutObject(ctx context.Context, bucketName string, objectKey string, lifetimeSecs int64) (*v4.PresignedHTTPRequest, error)
+		PresignHeadObject(ctx context.Context, bucketName string, objectKey string, lifetimeSecs int64) (*v4.PresignedHTTPRequest, error)
 	}
 	defaultPresigner struct {
 		presignClient *s3.PresignClient
@@ -104,6 +105,20 @@ func (p *defaultPresigner) PresignPostObject(ctx context.Context, bucketName str
 
 func (p *defaultPresigner) PresignPutObject(ctx context.Context, bucketName string, objectKey string, lifetimeSecs int64) (*v4.PresignedHTTPRequest, error) {
 	request, err := p.presignClient.PresignPutObject(ctx, &s3.PutObjectInput{
+		Bucket: aws.String(bucketName),
+		Key:    aws.String(objectKey),
+	}, func(options *s3.PresignOptions) {
+		options.Expires = time.Duration(lifetimeSecs) * time.Second
+	})
+	if err != nil {
+		log.Printf("Couldn't get a presigned post request to put %v:%v. Here's why: %v\n", bucketName, objectKey, err)
+		return nil, err
+	}
+	return request, nil
+}
+
+func (p *defaultPresigner) PresignHeadObject(ctx context.Context, bucketName string, objectKey string, lifetimeSecs int64) (*v4.PresignedHTTPRequest, error) {
+	request, err := p.presignClient.PresignHeadObject(ctx, &s3.HeadObjectInput{
 		Bucket: aws.String(bucketName),
 		Key:    aws.String(objectKey),
 	}, func(options *s3.PresignOptions) {
