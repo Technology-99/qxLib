@@ -41,6 +41,68 @@ var (
 	}
 )
 
+func ExtractCNAndENAndNum(s string) []string {
+	// 匹配：中文、英文大写、小写
+	re := regexp.MustCompile("[a-zA-Z0-9\u4e00-\u9fa5]+")
+	matches := re.FindAllString(s, -1)
+	// 去重 + 去空
+	seen := make(map[string]struct{})
+	var result []string
+	for _, part := range matches {
+		part = strings.TrimSpace(part)
+		if part == "" {
+			continue
+		}
+		if _, exists := seen[part]; !exists {
+			seen[part] = struct{}{}
+			result = append(result, part)
+		}
+	}
+	return result
+}
+
+func SplitBySymbolsAndDedup(s string) []string {
+	// 匹配所有非字母数字（包括空格、符号、标点等）
+	re := regexp.MustCompile(`[\P{L}\P{N}]+`)
+	parts := re.Split(s, -1)
+
+	// 去重 + 去空
+	seen := make(map[string]struct{})
+	var result []string
+	for _, part := range parts {
+		part = strings.TrimSpace(part)
+		if part == "" {
+			continue
+		}
+		if _, exists := seen[part]; !exists {
+			seen[part] = struct{}{}
+			result = append(result, part)
+		}
+	}
+	return result
+}
+
+func SplitAndDedup(s string) []string {
+	// 使用正则表达式分割：空格、中文逗号、英文逗号
+	re := regexp.MustCompile(`[ ,，]+`)
+	parts := re.Split(s, -1)
+
+	// 去重 + 去空
+	seen := make(map[string]struct{})
+	var result []string
+	for _, part := range parts {
+		part = strings.TrimSpace(part)
+		if part == "" {
+			continue
+		}
+		if _, exists := seen[part]; !exists {
+			seen[part] = struct{}{}
+			result = append(result, part)
+		}
+	}
+	return result
+}
+
 func ExtractPath(rawURL string) (string, error) {
 	parsedURL, err := url.Parse(rawURL)
 	if err != nil {
