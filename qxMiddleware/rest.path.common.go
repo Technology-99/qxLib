@@ -3,7 +3,7 @@ package qxMiddleware
 import (
 	"context"
 	"github.com/Technology-99/qxLib/qxCommonHeader"
-	"github.com/Technology-99/qxLib/qxSony"
+	"github.com/google/uuid"
 	"github.com/zeromicro/go-zero/core/logx"
 	"github.com/zeromicro/go-zero/rest/httpx"
 	"net/http"
@@ -63,12 +63,13 @@ func (m *PathHttpInterceptorMiddleware) Handle(next http.HandlerFunc) http.Handl
 		requestID := ""
 		xRequestIDFor := r.Header.Get(qxCommonHeader.HeaderXRequestIDFor)
 		if xRequestIDFor == "" {
-			requestID = qxSony.NextId()
+			requestID = uuid.NewString()
 			ctx = context.WithValue(ctx, CtxRequestID, requestID)
 		} else {
 			requestID = xRequestIDFor
 		}
 		ctx = context.WithValue(ctx, CtxRequestID, requestID)
+		w.Header().Set(qxCommonHeader.HeaderXRequestIDFor, requestID)
 
 		// 获取 User-Agent
 		userAgent := r.Header.Get(CtxUserAgent)
