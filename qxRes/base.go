@@ -2,8 +2,11 @@ package qxRes
 
 import (
 	"context"
+	"github.com/Technology-99/qxLib/qxCommonHeader"
 	"github.com/Technology-99/qxLib/qxErrors"
+	"github.com/Technology-99/qxLib/qxMiddleware"
 	"github.com/aws/smithy-go/encoding/xml"
+	"github.com/google/uuid"
 	"github.com/zeromicro/go-zero/rest/httpx"
 	"google.golang.org/grpc/status"
 	"net/http"
@@ -33,27 +36,27 @@ type baseXmlResponse[T any] struct {
 }
 
 // JsonBaseResponse writes v into w with http.StatusOK.
-func JsonBaseResponse(w http.ResponseWriter, v any) {
-	httpx.OkJson(w, wrapBaseResponse(v))
+func JsonBaseResponse(w http.ResponseWriter, r *http.Request, v any) {
+	httpx.OkJson(w, wrapBaseResponse(context.Background(), r, v))
 }
 
 // JsonBaseResponseCtx writes v into w with http.StatusOK.
-func JsonBaseResponseCtx(ctx context.Context, w http.ResponseWriter, v any) {
-	httpx.OkJsonCtx(ctx, w, wrapBaseResponse(v))
+func JsonBaseResponseCtx(ctx context.Context, w http.ResponseWriter, r *http.Request, v any) {
+	httpx.OkJsonCtx(ctx, w, wrapBaseResponse(ctx, r, v))
 }
 
 // XmlBaseResponse writes v into w with http.StatusOK.
-func XmlBaseResponse(w http.ResponseWriter, v any) {
-	OkXml(w, wrapXmlBaseResponse(v))
+func XmlBaseResponse(w http.ResponseWriter, r *http.Request, v any) {
+	OkXml(w, wrapXmlBaseResponse(context.Background(), r, v))
 }
 
 // XmlBaseResponseCtx writes v into w with http.StatusOK.
-func XmlBaseResponseCtx(ctx context.Context, w http.ResponseWriter, v any) {
-	OkXmlCtx(ctx, w, wrapXmlBaseResponse(v))
+func XmlBaseResponseCtx(ctx context.Context, w http.ResponseWriter, r *http.Request, v any) {
+	OkXmlCtx(ctx, w, wrapXmlBaseResponse(ctx, r, v))
 }
 
-func wrapXmlBaseResponse(v any) baseXmlResponse[any] {
-	base := wrapBaseResponse(v)
+func wrapXmlBaseResponse(ctx context.Context, r *http.Request, v any) baseXmlResponse[any] {
+	base := wrapBaseResponse(ctx, r, v)
 	return baseXmlResponse[any]{
 		Version:      xmlVersion,
 		Encoding:     xmlEncoding,
@@ -61,27 +64,54 @@ func wrapXmlBaseResponse(v any) baseXmlResponse[any] {
 	}
 }
 
-func wrapBaseResponse(v any) BaseResponse[any] {
+func wrapBaseResponse(ctx context.Context, r *http.Request, v any) BaseResponse[any] {
+	path := r.URL.Path
+	// note: 先从请求中获取
+	requestID := ""
+	xRequestIDFor := r.Header.Get(qxCommonHeader.HeaderXRequestIDFor)
+	if xRequestIDFor == "" {
+		// note: 再从上下文中获取
+		ctxRequestId := ctx.Value(qxMiddleware.CtxRequestID)
+		if ctxRequestId == nil {
+			requestID = uuid.NewString()
+		} else {
+			requestID = ctxRequestId.(string)
+		}
+	} else {
+		requestID = xRequestIDFor
+	}
 	var resp BaseResponse[any]
 	switch data := v.(type) {
 	case *qxErrors.CodeMsg:
 		resp.Code = data.Code
 		resp.Msg = data.Msg
+		resp.RequestId = requestID
+		resp.Path = path
 	case qxErrors.CodeMsg:
 		resp.Code = data.Code
 		resp.Msg = data.Msg
+		resp.RequestId = requestID
+		resp.Path = path
 	case *status.Status:
 		resp.Code = int32(data.Code())
 		resp.Msg = data.Message()
+		resp.RequestId = requestID
+		resp.Path = path
 	case interface{ GRPCStatus() *status.Status }:
 		resp.Code = int32(data.GRPCStatus().Code())
 		resp.Msg = data.GRPCStatus().Message()
+		resp.RequestId = requestID
+		resp.Path = path
 	case error:
 		resp.Code = FailedCodeError
 		resp.Msg = data.Error()
+		resp.RequestId = requestID
+		resp.Path = path
 	default:
 		resp.Code = SuccessCodeOK
 		resp.Msg = SuccessMsgOk
+		resp.RequestId = requestID
+		resp.Path = path
 		resp.Data = v
 	}
 
