@@ -2,6 +2,7 @@ package qxErrors
 
 import (
 	"fmt"
+	"github.com/Technology-99/qxLib/qxCodes"
 )
 
 type CodeMsg struct {
@@ -16,4 +17,8 @@ func (c *CodeMsg) Error() string {
 // New creates a new CodeMsg.
 func New(code int32, msg string) error {
 	return &CodeMsg{Code: code, Msg: msg}
+}
+
+func Quick(code int32, Lang string) error {
+	return &CodeMsg{Code: code, Msg: qxCodes.StatusText(code, Lang)}
 }
