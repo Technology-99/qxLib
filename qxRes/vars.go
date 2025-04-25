@@ -10,4 +10,8 @@ const (
 
 	XmlContentType  = "application/xml"
 	HTMLContentType = "application/html"
+
+	ContentType     = "Content-Type"
+	ContentTypeHtml = "text/html"
+	ContentTypeJson = "application/json"
 )

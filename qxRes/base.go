@@ -10,6 +10,7 @@ import (
 	"github.com/zeromicro/go-zero/rest/httpx"
 	"google.golang.org/grpc/status"
 	"net/http"
+	"strings"
 )
 
 // BaseResponse is the base response struct.
@@ -37,12 +38,16 @@ type baseXmlResponse[T any] struct {
 
 // JsonBaseResponse writes v into w with http.StatusOK.
 func JsonBaseResponse(w http.ResponseWriter, r *http.Request, v any) {
-	httpx.OkJson(w, wrapBaseResponse(context.Background(), r, v))
+	JsonBaseResponseCtx(context.Background(), w, r, v)
 }
 
 // JsonBaseResponseCtx writes v into w with http.StatusOK.
 func JsonBaseResponseCtx(ctx context.Context, w http.ResponseWriter, r *http.Request, v any) {
-	httpx.OkJsonCtx(ctx, w, wrapBaseResponse(ctx, r, v))
+	if strings.Contains(w.Header().Get(ContentType), ContentTypeHtml) {
+		// note: 因为大部分返回html的时候都是模板渲染，所以不需要写入
+	} else {
+		httpx.OkJsonCtx(ctx, w, wrapBaseResponse(ctx, r, v))
+	}
 }
 
 // XmlBaseResponse writes v into w with http.StatusOK.
