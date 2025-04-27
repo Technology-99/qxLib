@@ -226,6 +226,7 @@ var WrongMessageEnUS = map[int32]string{
 	BsStatusOauth2CodeVerifierNotMatch:          "code_verifier not match",
 	BsStatusOauth2ClientSecretIsEmpty:           "client_secret is empty",
 	BsStatusOauth2ClientSecretNotMatch:          "client_secret not match",
+	BsStatusOauth2ClientIdDisabled:              "client_id is disabled",
 	BsStatusInternalServerError:                 "Internal Server Error",
 	BsStatusNotImplemented:                      "Not Implemented",
 	BsStatusBadGateway:                          "Bad Gateway",
