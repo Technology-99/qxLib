@@ -233,6 +233,8 @@ const (
 	BsStatusOauth2RedirectUriNotMatch           int32 = 40063 // 语义: 错误的redirect_uri
 	BsStatusOauth2CodeVerifierIsEmpty           int32 = 40064 // 语义: code_verifier不能为空
 	BsStatusOauth2CodeVerifierNotMatch          int32 = 40065 // 语义: 错误的code_verifier
+	BsStatusOauth2ClientSecretIsEmpty           int32 = 40066 // 语义: 非PKCE模式，client密钥必须
+	BsStatusOauth2ClientSecretNotMatch          int32 = 40067 // 语义: client密钥错误
 	BsStatusInternalServerError                 int32 = 50000 // 语义: 服务器内部错误，无法完成请求
 	BsStatusNotImplemented                      int32 = 50001 // 语义: 服务器不支持请求的功能，无法完成请求
 	BsStatusBadGateway                          int32 = 50002 // 语义: 作为网关或者代理工作的服务器尝试执行请求时，从远程服务器接收到了一个无效的响应

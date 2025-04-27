@@ -224,6 +224,8 @@ var WrongMessageZhCN = map[int32]string{
 	BsStatusOauth2RedirectUriNotMatch:           "错误的redirect_uri",
 	BsStatusOauth2CodeVerifierIsEmpty:           "code_verifier不能为空",
 	BsStatusOauth2CodeVerifierNotMatch:          "错误的code_verifier",
+	BsStatusOauth2ClientSecretIsEmpty:           "非PKCE模式，client密钥必须",
+	BsStatusOauth2ClientSecretNotMatch:          "client密钥错误",
 	BsStatusInternalServerError:                 "服务器内部错误，无法完成请求",
 	BsStatusNotImplemented:                      "服务器不支持请求的功能，无法完成请求",
 	BsStatusBadGateway:                          "作为网关或者代理工作的服务器尝试执行请求时，从远程服务器接收到了一个无效的响应",
