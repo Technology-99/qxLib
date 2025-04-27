@@ -225,6 +225,7 @@ const (
 	BsStatusOauth2InvalidScope                  int32 = 40055 // 语义: 错误的scope
 	BsStatusOauth2InvalidState                  int32 = 40056 // 语义: 错误的state
 	BsStatusOauth2InvalidNonce                  int32 = 40057 // 语义: 错误的nonce
+	BsStatusOauth2UnsupportedGrantType          int32 = 40058 // 语义: 不支持的grant_type
 	BsStatusInternalServerError                 int32 = 50000 // 语义: 服务器内部错误，无法完成请求
 	BsStatusNotImplemented                      int32 = 50001 // 语义: 服务器不支持请求的功能，无法完成请求
 	BsStatusBadGateway                          int32 = 50002 // 语义: 作为网关或者代理工作的服务器尝试执行请求时，从远程服务器接收到了一个无效的响应

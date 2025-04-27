@@ -216,6 +216,7 @@ var WrongMessageZhTW = map[int32]string{
 	BsStatusOauth2InvalidScope:                  "错误的scope",
 	BsStatusOauth2InvalidState:                  "错误的state",
 	BsStatusOauth2InvalidNonce:                  "错误的nonce",
+	BsStatusOauth2UnsupportedGrantType:          "不支持的grant_type",
 	BsStatusInternalServerError:                 "服务器内部错误，无法完成请求",
 	BsStatusNotImplemented:                      "服务器不支持请求的功能，无法完成请求",
 	BsStatusBadGateway:                          "作为网关或者代理工作的服务器尝试执行请求时，从远程服务器接收到了一个无效的响应",
