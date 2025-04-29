@@ -37,31 +37,31 @@ type baseXmlResponse[T any] struct {
 }
 
 // JsonBaseResponse writes v into w with http.StatusOK.
-func JsonBaseResponse(w http.ResponseWriter, r *http.Request, v any) {
-	JsonBaseResponseCtx(context.Background(), w, r, v)
+func JsonBaseResponse(w http.ResponseWriter, r *http.Request, res any, err any) {
+	JsonBaseResponseCtx(context.Background(), w, r, res, err)
 }
 
 // JsonBaseResponseCtx writes v into w with http.StatusOK.
-func JsonBaseResponseCtx(ctx context.Context, w http.ResponseWriter, r *http.Request, v any) {
+func JsonBaseResponseCtx(ctx context.Context, w http.ResponseWriter, r *http.Request, res any, err any) {
 	if strings.Contains(w.Header().Get(ContentType), ContentTypeHtml) {
 		// note: 因为大部分返回html的时候都是模板渲染，所以不需要写入
 	} else {
-		httpx.OkJsonCtx(ctx, w, wrapBaseResponse(ctx, r, v))
+		httpx.OkJsonCtx(ctx, w, wrapBaseResponse(ctx, r, res, err))
 	}
 }
 
 // XmlBaseResponse writes v into w with http.StatusOK.
-func XmlBaseResponse(w http.ResponseWriter, r *http.Request, v any) {
-	OkXml(w, wrapXmlBaseResponse(context.Background(), r, v))
+func XmlBaseResponse(w http.ResponseWriter, r *http.Request, res any, err any) {
+	OkXml(w, wrapXmlBaseResponse(context.Background(), r, res, err))
 }
 
 // XmlBaseResponseCtx writes v into w with http.StatusOK.
-func XmlBaseResponseCtx(ctx context.Context, w http.ResponseWriter, r *http.Request, v any) {
-	OkXmlCtx(ctx, w, wrapXmlBaseResponse(ctx, r, v))
+func XmlBaseResponseCtx(ctx context.Context, w http.ResponseWriter, r *http.Request, res any, err any) {
+	OkXmlCtx(ctx, w, wrapXmlBaseResponse(ctx, r, res, err))
 }
 
-func wrapXmlBaseResponse(ctx context.Context, r *http.Request, v any) baseXmlResponse[any] {
-	base := wrapBaseResponse(ctx, r, v)
+func wrapXmlBaseResponse(ctx context.Context, r *http.Request, res any, err any) baseXmlResponse[any] {
+	base := wrapBaseResponse(ctx, r, res, err)
 	return baseXmlResponse[any]{
 		Version:      xmlVersion,
 		Encoding:     xmlEncoding,
@@ -69,7 +69,7 @@ func wrapXmlBaseResponse(ctx context.Context, r *http.Request, v any) baseXmlRes
 	}
 }
 
-func wrapBaseResponse(ctx context.Context, r *http.Request, v any) BaseResponse[any] {
+func wrapBaseResponse(ctx context.Context, r *http.Request, res any, err any) BaseResponse[any] {
 	path := r.URL.Path
 	// note: 先从请求中获取
 	requestID := ""
@@ -86,38 +86,51 @@ func wrapBaseResponse(ctx context.Context, r *http.Request, v any) BaseResponse[
 		requestID = xRequestIDFor
 	}
 	var resp BaseResponse[any]
-	switch data := v.(type) {
-	case *qxErrors.CodeMsg:
-		resp.Code = data.Code
-		resp.Msg = data.Msg
-		resp.RequestId = requestID
-		resp.Path = path
-	case qxErrors.CodeMsg:
-		resp.Code = data.Code
-		resp.Msg = data.Msg
-		resp.RequestId = requestID
-		resp.Path = path
-	case *status.Status:
-		resp.Code = int32(data.Code())
-		resp.Msg = data.Message()
-		resp.RequestId = requestID
-		resp.Path = path
-	case interface{ GRPCStatus() *status.Status }:
-		resp.Code = int32(data.GRPCStatus().Code())
-		resp.Msg = data.GRPCStatus().Message()
-		resp.RequestId = requestID
-		resp.Path = path
-	case error:
-		resp.Code = FailedCodeError
-		resp.Msg = data.Error()
-		resp.RequestId = requestID
-		resp.Path = path
-	default:
+	if err == nil {
 		resp.Code = SuccessCodeOK
 		resp.Msg = SuccessMsgOk
 		resp.RequestId = requestID
 		resp.Path = path
-		resp.Data = v
+		resp.Data = res
+	} else {
+		switch data := err.(type) {
+		case *qxErrors.CodeMsg:
+			resp.Code = data.Code
+			resp.Msg = data.Msg
+			resp.RequestId = requestID
+			resp.Path = path
+			resp.Data = res
+		case qxErrors.CodeMsg:
+			resp.Code = data.Code
+			resp.Msg = data.Msg
+			resp.RequestId = requestID
+			resp.Path = path
+			resp.Data = res
+		case *status.Status:
+			resp.Code = int32(data.Code())
+			resp.Msg = data.Message()
+			resp.RequestId = requestID
+			resp.Path = path
+			resp.Data = res
+		case interface{ GRPCStatus() *status.Status }:
+			resp.Code = int32(data.GRPCStatus().Code())
+			resp.Msg = data.GRPCStatus().Message()
+			resp.RequestId = requestID
+			resp.Path = path
+			resp.Data = res
+		case error:
+			resp.Code = FailedCodeError
+			resp.Msg = data.Error()
+			resp.RequestId = requestID
+			resp.Path = path
+			resp.Data = res
+		default:
+			resp.Code = SuccessCodeOK
+			resp.Msg = SuccessMsgOk
+			resp.RequestId = requestID
+			resp.Path = path
+			resp.Data = res
+		}
 	}
 
 	return resp
