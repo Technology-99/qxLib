@@ -92,31 +92,26 @@ func wrapBaseResponse(ctx context.Context, r *http.Request, v any) BaseResponse[
 		resp.Msg = data.Msg
 		resp.RequestId = requestID
 		resp.Path = path
-		resp.Data = v
 	case qxErrors.CodeMsg:
 		resp.Code = data.Code
 		resp.Msg = data.Msg
 		resp.RequestId = requestID
 		resp.Path = path
-		resp.Data = v
 	case *status.Status:
 		resp.Code = int32(data.Code())
 		resp.Msg = data.Message()
 		resp.RequestId = requestID
 		resp.Path = path
-		resp.Data = v
 	case interface{ GRPCStatus() *status.Status }:
 		resp.Code = int32(data.GRPCStatus().Code())
 		resp.Msg = data.GRPCStatus().Message()
 		resp.RequestId = requestID
 		resp.Path = path
-		resp.Data = v
 	case error:
 		resp.Code = FailedCodeError
 		resp.Msg = data.Error()
 		resp.RequestId = requestID
 		resp.Path = path
-		resp.Data = v
 	default:
 		resp.Code = SuccessCodeOK
 		resp.Msg = SuccessMsgOk
