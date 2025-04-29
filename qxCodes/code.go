@@ -181,6 +181,8 @@ const (
 	BsStatusMultiStatus                         int32 = 20007 // 语义: WebDAV扩展，表示多个状态
 	BsStatusAlreadyReported                     int32 = 20008 // 语义: WebDAV扩展，资源已存在
 	BsStatusIMUsed                              int32 = 20026 // 语义: 服务器完成请求，但返回的是变更后的资源
+	OauthAcrRequiredLevel                       int32 = 20027 // 语义: 需要达到acr要求的安全认证等级
+	OauthMultipleAccount                        int32 = 20028 // 语义: 该手机号存在多个绑定账号
 	BsStatusMultipleChoices                     int32 = 30000 // 语义: 多种选择。
 	BsStatusMovedPermanently                    int32 = 30001 // 语义: 永久移动。
 	BsStatusFound                               int32 = 30002 // 语义: 临时移动。

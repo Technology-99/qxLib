@@ -172,6 +172,8 @@ var WrongMessageZhTW = map[int32]string{
 	BsStatusMultiStatus:                         "WebDAV扩展，表示多个状态",
 	BsStatusAlreadyReported:                     "WebDAV扩展，资源已存在",
 	BsStatusIMUsed:                              "服务器完成请求，但返回的是变更后的资源",
+	OauthAcrRequiredLevel:                       "需要达到acr要求的安全认证等级",
+	OauthMultipleAccount:                        "该手机号存在多个绑定账号",
 	BsStatusMultipleChoices:                     "多种选择。",
 	BsStatusMovedPermanently:                    "永久移动。",
 	BsStatusFound:                               "临时移动。",

@@ -172,6 +172,8 @@ var WrongMessageEnUS = map[int32]string{
 	BsStatusMultiStatus:                         "Multi-Status",
 	BsStatusAlreadyReported:                     "Already Reported",
 	BsStatusIMUsed:                              "IM Used",
+	OauthAcrRequiredLevel:                       "Acr required level does not meet the standard",
+	OauthMultipleAccount:                        "This phone number has multiple bound accounts",
 	BsStatusMultipleChoices:                     "Multiple Choices",
 	BsStatusMovedPermanently:                    "Moved Permanently",
 	BsStatusFound:                               "Found",
