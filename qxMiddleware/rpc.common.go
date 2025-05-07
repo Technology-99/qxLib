@@ -47,19 +47,11 @@ func StreamHeaderParseInterceptor() grpc.StreamServerInterceptor {
 		xTenantIDFor := tempMD.Get(qxCommonHeader.HeaderXTenantIDFor)
 		if len(requestId) > 0 {
 			ctx = context.WithValue(ctx, CtxTenantId, xTenantIDFor[0])
-		} else {
-			result.Code = qxCodes.QxEngineStatusNotFoundMetadata
-			result.Msg = qxCodes.StatusText(qxCodes.QxEngineStatusNotFoundMetadata)
-			return errors.New(qxCodes.StatusText(qxCodes.QxEngineStatusNotFoundMetadata))
 		}
 
 		xDomainIdFor := tempMD.Get(qxCommonHeader.HeaderXDomainIDFor)
 		if len(requestId) > 0 {
 			ctx = context.WithValue(ctx, CtxDomainId, xDomainIdFor[0])
-		} else {
-			result.Code = qxCodes.QxEngineStatusNotFoundMetadata
-			result.Msg = qxCodes.StatusText(qxCodes.QxEngineStatusNotFoundMetadata)
-			return errors.New(qxCodes.StatusText(qxCodes.QxEngineStatusNotFoundMetadata))
 		}
 
 		return handler(svr, stream)
@@ -90,28 +82,16 @@ func UnaryHeaderParseInterceptor() grpc.UnaryServerInterceptor {
 		if len(requestId) > 0 {
 			ctx = context.WithValue(ctx, CtxRequestID, requestId[0])
 			result.RequestID = requestId[0]
-		} else {
-			tempRequestId := qxSony.NextId()
-			ctx = context.WithValue(ctx, CtxRequestID, tempRequestId)
-			result.RequestID = tempRequestId
 		}
 
 		xTenantIDFor := tempMD.Get(qxCommonHeader.HeaderXTenantIDFor)
 		if len(requestId) > 0 {
 			ctx = context.WithValue(ctx, CtxTenantId, xTenantIDFor[0])
-		} else {
-			result.Code = qxCodes.QxEngineStatusNotFoundMetadata
-			result.Msg = qxCodes.StatusText(qxCodes.QxEngineStatusNotFoundMetadata)
-			return result, nil
 		}
 
 		xDomainIdFor := tempMD.Get(qxCommonHeader.HeaderXDomainIDFor)
 		if len(requestId) > 0 {
 			ctx = context.WithValue(ctx, CtxDomainId, xDomainIdFor[0])
-		} else {
-			result.Code = qxCodes.QxEngineStatusNotFoundMetadata
-			result.Msg = qxCodes.StatusText(qxCodes.QxEngineStatusNotFoundMetadata)
-			return result, nil
 		}
 
 		return handler(ctx, req)
