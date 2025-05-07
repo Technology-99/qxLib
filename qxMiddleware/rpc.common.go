@@ -44,16 +44,6 @@ func StreamHeaderParseInterceptor() grpc.StreamServerInterceptor {
 		}
 
 		//note: 读取metadata中的信息
-		xAccessKeyFor := tempMD.Get(qxCommonHeader.HeaderXAccessKeyFor)
-		if len(xAccessKeyFor) > 0 {
-			ctx = context.WithValue(ctx, CtxXAccessKeyFor, xAccessKeyFor[0])
-		} else {
-			result.Code = qxCodes.QxEngineStatusNotFoundMetadata
-			result.Msg = qxCodes.StatusText(qxCodes.QxEngineStatusNotFoundMetadata)
-			return errors.New(qxCodes.StatusText(qxCodes.QxEngineStatusNotFoundMetadata))
-		}
-
-		//note: 读取metadata中的信息
 		xTenantIDFor := tempMD.Get(qxCommonHeader.HeaderXTenantIDFor)
 		if len(requestId) > 0 {
 			ctx = context.WithValue(ctx, CtxTenantId, xTenantIDFor[0])
