@@ -82,6 +82,10 @@ func UnaryHeaderParseInterceptor() grpc.UnaryServerInterceptor {
 		if len(requestId) > 0 {
 			ctx = context.WithValue(ctx, CtxRequestID, requestId[0])
 			result.RequestID = requestId[0]
+		} else {
+			tempRequestId := qxSony.NextId()
+			ctx = context.WithValue(ctx, CtxRequestID, tempRequestId)
+			result.RequestID = tempRequestId
 		}
 
 		xTenantIDFor := tempMD.Get(qxCommonHeader.HeaderXTenantIDFor)
