@@ -5,7 +5,7 @@ import (
 	"errors"
 	"github.com/Technology-99/qxLib/qxCodes"
 	"github.com/Technology-99/qxLib/qxCommonHeader"
-	"github.com/Technology-99/qxLib/qxSony"
+	"github.com/google/uuid"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 )
@@ -38,7 +38,7 @@ func StreamHeaderParseInterceptor() grpc.StreamServerInterceptor {
 			ctx = context.WithValue(ctx, CtxRequestID, requestId[0])
 			result.RequestID = requestId[0]
 		} else {
-			tempRequestId := qxSony.NextId()
+			tempRequestId := uuid.NewString()
 			ctx = context.WithValue(ctx, CtxRequestID, tempRequestId)
 			result.RequestID = tempRequestId
 		}
@@ -83,7 +83,7 @@ func UnaryHeaderParseInterceptor() grpc.UnaryServerInterceptor {
 			ctx = context.WithValue(ctx, CtxRequestID, requestId[0])
 			result.RequestID = requestId[0]
 		} else {
-			tempRequestId := qxSony.NextId()
+			tempRequestId := uuid.NewString()
 			ctx = context.WithValue(ctx, CtxRequestID, tempRequestId)
 			result.RequestID = tempRequestId
 		}
