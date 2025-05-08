@@ -14,14 +14,14 @@ type BaseModel struct {
 
 type UniqueIdAdminModel struct {
 	CreatedBy string `gorm:"index:idx_created_by;column:created_by;comment:创建者;type: varchar(255)" json:"createdBy"`
-	UpdatedBy string `gorm:"index:idx_created_by;column:updated_by;comment:更新者;type: varchar(255)" json:"updatedBy"`
-	DeletedBy string `gorm:"index:idx_created_by;column:deleted_by;comment:删除者;type: varchar(255)" json:"deletedBy"`
+	UpdatedBy string `gorm:"index:idx_updated_by;column:updated_by;comment:更新者;type: varchar(255)" json:"updatedBy"`
+	DeletedBy string `gorm:"index:idx_deleted_by;column:deleted_by;comment:删除者;type: varchar(255)" json:"-"`
 }
 
 type BaseAdminModel struct {
 	CreatedBy uint `gorm:"column:created_by;comment:创建者;type: int" json:"createdBy"`
 	UpdatedBy uint `gorm:"column:updated_by;comment:更新者;type: int" json:"updatedBy"`
-	DeletedBy uint `gorm:"column:deleted_by;comment:删除者;type: int" json:"deletedBy"`
+	DeletedBy uint `gorm:"column:deleted_by;comment:删除者;type: int" json:"-"`
 }
 
 type BaseTenantModel struct {
