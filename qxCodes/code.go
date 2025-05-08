@@ -183,6 +183,7 @@ const (
 	BsStatusIMUsed                              int32 = 20026 // 语义: 服务器完成请求，但返回的是变更后的资源
 	OauthAcrRequiredLevel                       int32 = 20027 // 语义: 需要达到acr要求的安全认证等级
 	OauthMultipleAccount                        int32 = 20028 // 语义: 该手机号存在多个绑定账号
+	BsStatusResourceExists                      int32 = 20029 // 语义: 资源已存在
 	BsStatusMultipleChoices                     int32 = 30000 // 语义: 多种选择。
 	BsStatusMovedPermanently                    int32 = 30001 // 语义: 永久移动。
 	BsStatusFound                               int32 = 30002 // 语义: 临时移动。
@@ -238,6 +239,7 @@ const (
 	BsStatusOauth2ClientSecretIsEmpty           int32 = 40066 // 语义: 非PKCE模式，client密钥必须
 	BsStatusOauth2ClientSecretNotMatch          int32 = 40067 // 语义: client密钥错误
 	BsStatusOauth2ClientIdDisabled              int32 = 40068 // 语义: clientId已经被禁用
+	BsStatusCodeInvalid                         int32 = 40069 // 语义: 验证码错误
 	BsStatusInternalServerError                 int32 = 50000 // 语义: 服务器内部错误，无法完成请求
 	BsStatusNotImplemented                      int32 = 50001 // 语义: 服务器不支持请求的功能，无法完成请求
 	BsStatusBadGateway                          int32 = 50002 // 语义: 作为网关或者代理工作的服务器尝试执行请求时，从远程服务器接收到了一个无效的响应
