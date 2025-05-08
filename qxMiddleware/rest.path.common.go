@@ -60,14 +60,7 @@ func (m *PathHttpInterceptorMiddleware) Handle(next http.HandlerFunc) http.Handl
 			logx.Infof("client port: %s", clientPort)
 		}
 
-		requestID := ""
-		xRequestIDFor := r.Header.Get(qxCommonHeader.HeaderXRequestIDFor)
-		if xRequestIDFor == "" {
-			requestID = uuid.NewString()
-			ctx = context.WithValue(ctx, CtxRequestID, requestID)
-		} else {
-			requestID = xRequestIDFor
-		}
+		requestID := uuid.NewString()
 		ctx = context.WithValue(ctx, CtxRequestID, requestID)
 		w.Header().Set(qxCommonHeader.HeaderXRequestIDFor, requestID)
 
@@ -75,14 +68,8 @@ func (m *PathHttpInterceptorMiddleware) Handle(next http.HandlerFunc) http.Handl
 		userAgent := r.Header.Get(CtxUserAgent)
 		ctx = context.WithValue(ctx, CtxUserAgent, userAgent)
 
-		xAccessKeyFor := r.Header.Get(qxCommonHeader.HeaderXAccessKeyFor)
-		xSessionIdFor := r.Header.Get(qxCommonHeader.HeaderXSessionIdFor)
 		xAuthMethodFor := r.Header.Get(qxCommonHeader.HeaderXAuthMethodFor)
-		xAccountFor := r.Header.Get(qxCommonHeader.HeaderXAccessKeyFor)
-		ctx = context.WithValue(ctx, CtxXAccessKeyFor, xAccessKeyFor)
-		ctx = context.WithValue(ctx, CtxSessionIDFor, xSessionIdFor)
 		ctx = context.WithValue(ctx, CtxXAuthMethodFor, xAuthMethodFor)
-		ctx = context.WithValue(ctx, CtxXAccountFor, xAccountFor)
 
 		//ctx = context.WithValue(ctx, "clientPort", fullAddrAndPort[1])
 		r = r.WithContext(ctx)
