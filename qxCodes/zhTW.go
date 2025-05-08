@@ -162,6 +162,8 @@ var WrongMessageZhTW = map[int32]string{
 	BsStatusSwitchingProtocols:                  "服务器同意客户段的协议升级请求",
 	BsStatusProcessing:                          "服务器已接收请求，但是仍然在处理中",
 	BsStatusEarlyHints:                          "服务器提前发送头部信息（用于优化请求）",
+	BsStatusAccountNotFound:                     "account not found",
+	BsStatusAccountOrPwdInvalid:                 "账号或密码错误",
 	BsStatusOK:                                  "请求成功。",
 	BsStatusCreated:                             "已创建。",
 	BsStatusAccepted:                            "已接受。",
