@@ -24,7 +24,7 @@ type BaseResponse[T any] struct {
 	Path string `json:"path" xml:"path"`
 	// Msg represents the business message, if Code = BusinessCodeOK,
 	// and Msg is empty, then the Msg will be set to BusinessMsgOk.
-	RequestId string `json:"requestId" xml:"request_id"`
+	RequestId string `json:"request_id" xml:"request_id"`
 	// Data represents the business data.
 	Data T `json:"data,omitempty" xml:"data,omitempty"`
 }
