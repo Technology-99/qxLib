@@ -41,6 +41,16 @@ var (
 	}
 )
 
+func GetScheme(r *http.Request) string {
+	if r.TLS != nil {
+		return "https"
+	}
+	if scheme := r.Header.Get("X-Forwarded-Proto"); scheme != "" {
+		return scheme
+	}
+	return "http"
+}
+
 func ExtractCNAndENAndNum(s string) []string {
 	// 匹配：中文、英文大写、小写
 	re := regexp.MustCompile("[a-zA-Z0-9\u4e00-\u9fa5]+")
