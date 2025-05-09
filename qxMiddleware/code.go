@@ -6,6 +6,7 @@ const (
 )
 
 const (
+	CtxSiteDomain      = "SiteDomain"
 	CtxStartTime       = "StartTime"
 	CtxClientIp        = "ClientIp"
 	CtxClientPort      = "ClientPort"
