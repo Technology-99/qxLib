@@ -37,7 +37,6 @@ func (m *RegionInterceptorMiddleware) Handle(next http.HandlerFunc) http.Handler
 		}
 
 		startTime := time.Now()
-		logc.Debugf(ctx, "起始时间: %s", startTime.Format(time.DateTime))
 
 		info, _ := m.Region.MemorySearch(clientIp)
 		ctx = context.WithValue(ctx, CtxCityId, info.CityId)
@@ -47,7 +46,6 @@ func (m *RegionInterceptorMiddleware) Handle(next http.HandlerFunc) http.Handler
 		ctx = context.WithValue(ctx, CtxCity, info.City)
 		ctx = context.WithValue(ctx, CtxISP, info.ISP)
 		endTime := time.Now()
-		logc.Debugf(ctx, "结束时间: %s", endTime.Format(time.DateTime))
 		logc.Infof(ctx, "地理位置中间件耗时: %v", endTime.Sub(startTime).Milliseconds())
 
 		r = r.WithContext(ctx)

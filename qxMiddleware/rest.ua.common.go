@@ -32,8 +32,6 @@ func (m *UaParserInterceptorMiddleware) Handle(next http.HandlerFunc) http.Handl
 		}
 
 		startTime := time.Now()
-		logc.Debugf(ctx, "起始时间: %s", startTime.Format(time.DateTime))
-
 		client := m.Uaparser.Parse(userAgent)
 		ctx = context.WithValue(ctx, CtxUserAgentFamily, client.UserAgent.Family)
 		ctx = context.WithValue(ctx, CtxUserAgentMajor, client.UserAgent.Major)
@@ -50,7 +48,6 @@ func (m *UaParserInterceptorMiddleware) Handle(next http.HandlerFunc) http.Handl
 		ctx = context.WithValue(ctx, CtxDeviceBrand, client.Device.Brand)
 		ctx = context.WithValue(ctx, CtxDeviceModel, client.Device.Model)
 		endTime := time.Now()
-		logc.Debugf(ctx, "结束时间: %s", endTime.Format(time.DateTime))
 		logc.Infof(ctx, "设备解析中间件耗时: %v", endTime.Sub(startTime).Milliseconds())
 
 		r = r.WithContext(ctx)

@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/Technology-99/qxLib/qxCommonHeader"
 	"github.com/google/uuid"
+	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
 	"github.com/zeromicro/go-zero/rest/httpx"
 	"net/http"
@@ -21,10 +22,10 @@ func NewPathHttpInterceptorMiddleware() *PathHttpInterceptorMiddleware {
 
 func (m *PathHttpInterceptorMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		start := time.Now().UnixMilli()
+		startTime := time.Now()
 		ctx := context.WithValue(r.Context(), CtxFullMethod, r.URL.Path)
 		ctx = context.WithValue(ctx, CtxRequestURI, r.RequestURI)
-		ctx = context.WithValue(ctx, CtxStartTime, start)
+		ctx = context.WithValue(ctx, CtxStartTime, startTime.UnixMilli())
 		fullAddr := httpx.GetRemoteAddr(r)
 		// 定义正则表达式
 		regex := `^\[?([a-fA-F0-9:.%]+)\]?(?::([0-9]+))?$`
@@ -37,12 +38,9 @@ func (m *PathHttpInterceptorMiddleware) Handle(next http.HandlerFunc) http.Handl
 		if len(matches) != 3 {
 			fullAddrAndPort := strings.Split(fullAddr, ":")
 			if len(fullAddrAndPort) == 1 {
-				logx.Infof("client ip: %s", fullAddrAndPort[0])
 				ctx = context.WithValue(ctx, CtxClientIp, fullAddrAndPort[0])
 				ctx = context.WithValue(ctx, CtxClientPort, "")
 			} else if len(fullAddrAndPort) == 2 {
-				logx.Infof("client ip: %s", fullAddrAndPort[0])
-				logx.Infof("client port: %s", fullAddrAndPort[1])
 				ctx = context.WithValue(ctx, CtxClientIp, fullAddrAndPort[0])
 				ctx = context.WithValue(ctx, CtxClientPort, fullAddrAndPort[1])
 			} else {
@@ -56,8 +54,6 @@ func (m *PathHttpInterceptorMiddleware) Handle(next http.HandlerFunc) http.Handl
 				clientIp = "127.0.0.1"
 			}
 			ctx = context.WithValue(ctx, CtxClientIp, clientIp)
-			logx.Infof("client ip: %s", clientIp)
-			logx.Infof("client port: %s", clientPort)
 		}
 
 		requestID := uuid.NewString()
@@ -68,10 +64,9 @@ func (m *PathHttpInterceptorMiddleware) Handle(next http.HandlerFunc) http.Handl
 		userAgent := r.Header.Get(CtxUserAgent)
 		ctx = context.WithValue(ctx, CtxUserAgent, userAgent)
 
-		xAuthMethodFor := r.Header.Get(qxCommonHeader.HeaderXAuthMethodFor)
-		ctx = context.WithValue(ctx, CtxXAuthMethodFor, xAuthMethodFor)
+		endTime := time.Now()
+		logc.Infof(ctx, "路径ip处理中间件耗时: %v", endTime.Sub(startTime).Milliseconds())
 
-		//ctx = context.WithValue(ctx, "clientPort", fullAddrAndPort[1])
 		r = r.WithContext(ctx)
 		next(w, r)
 	}
