@@ -2,6 +2,7 @@ package qxRes
 
 import (
 	"context"
+	"github.com/Technology-99/qxLib/qxCodes"
 	"github.com/Technology-99/qxLib/qxCommonHeader"
 	"github.com/Technology-99/qxLib/qxErrors"
 	"github.com/Technology-99/qxLib/qxMiddleware"
@@ -87,8 +88,8 @@ func wrapBaseResponse(ctx context.Context, r *http.Request, res any, err any) Ba
 	}
 	var resp BaseResponse[any]
 	if err == nil {
-		resp.Code = SuccessCodeOK
-		resp.Msg = SuccessMsgOk
+		resp.Code = qxCodes.QxEngineStatusOK
+		resp.Msg = qxCodes.StatusText(qxCodes.QxEngineStatusOK, qxCodes.LangEnUS)
 		resp.RequestId = requestID
 		resp.Path = path
 		resp.Data = res
@@ -119,14 +120,14 @@ func wrapBaseResponse(ctx context.Context, r *http.Request, res any, err any) Ba
 			resp.Path = path
 			resp.Data = res
 		case error:
-			resp.Code = FailedCodeError
+			resp.Code = qxCodes.QxEngineStatusBadRequest
 			resp.Msg = data.Error()
 			resp.RequestId = requestID
 			resp.Path = path
 			resp.Data = res
 		default:
-			resp.Code = SuccessCodeOK
-			resp.Msg = SuccessMsgOk
+			resp.Code = qxCodes.QxEngineStatusOK
+			resp.Msg = qxCodes.StatusText(qxCodes.QxEngineStatusOK, qxCodes.LangEnUS)
 			resp.RequestId = requestID
 			resp.Path = path
 			resp.Data = res
