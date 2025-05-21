@@ -34,8 +34,14 @@ func (m *PathHttpInterceptorMiddleware) Handle(next http.HandlerFunc) http.Handl
 		port := ""
 		var err error
 		if ipType(realAddr) == "IPv4" {
-			// note: 带端口号的ip
-			ip, port, err = net.SplitHostPort(realAddr)
+			if strings.Contains(realAddr, ":") {
+				// note: 带端口号的ip
+				ip, port, err = net.SplitHostPort(realAddr)
+			} else {
+				// note: 不带端口号的ip
+				ip = realAddr
+				port = ""
+			}
 			ctx = context.WithValue(ctx, CtxClientIp, ip)
 			ctx = context.WithValue(ctx, CtxClientPort, port)
 		} else {
