@@ -2,10 +2,7 @@ package qxMiddleware
 
 import (
 	"context"
-	"github.com/Technology-99/qxLib/qxCodes"
 	"github.com/Technology-99/qxLib/qxCommonHeader"
-	"github.com/Technology-99/qxLib/qxErrors"
-	"github.com/Technology-99/qxLib/qxRes"
 	"github.com/google/uuid"
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
@@ -31,7 +28,7 @@ func (m *PathHttpInterceptorMiddleware) Handle(next http.HandlerFunc) http.Handl
 		fullAddr := httpx.GetRemoteAddr(r)
 		ip, port, err := net.SplitHostPort(fullAddr)
 		if err != nil {
-			qxRes.JsonBaseResponseCtx(r.Context(), w, r, nil, qxErrors.Quick(qxCodes.StatusNotImplemented, qxCodes.LangZhCN))
+			http.Error(w, "不支持的ip类型", http.StatusNotImplemented)
 			return
 		}
 		logx.Infof("ip: %s, port: %s", ip, port)
