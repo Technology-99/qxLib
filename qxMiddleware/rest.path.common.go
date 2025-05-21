@@ -29,9 +29,7 @@ func (m *PathHttpInterceptorMiddleware) Handle(next http.HandlerFunc) http.Handl
 		ctx = context.WithValue(ctx, CtxStartTime, startTime.UnixMilli())
 		fullAddr := httpx.GetRemoteAddr(r)
 		ips := strings.Split(fullAddr, ",")
-		logx.Infof("pathInterceptorMiddleware full ips: %v", ips)
 		realAddr := ips[0]
-		logx.Infof("pathInterceptorMiddleware full realAddr: %s", realAddr)
 		ip := ""
 		port := ""
 		var err error
