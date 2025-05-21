@@ -29,11 +29,13 @@ func (m *PathHttpInterceptorMiddleware) Handle(next http.HandlerFunc) http.Handl
 		ctx = context.WithValue(ctx, CtxStartTime, startTime.UnixMilli())
 		fullAddr := httpx.GetRemoteAddr(r)
 		ips := strings.Split(fullAddr, ",")
+		logx.Infof("pathInterceptorMiddleware full ips: %v", ips)
 		realAddr := ips[0]
+		logx.Infof("pathInterceptorMiddleware full realAddr: %s", realAddr)
 		ip := ""
 		port := ""
 		var err error
-		if strings.Contains(fullAddr, ":") {
+		if ipType(realAddr) == "IPv4" {
 			// note: 带端口号的ip
 			ip, port, err = net.SplitHostPort(realAddr)
 			ctx = context.WithValue(ctx, CtxClientIp, ip)
@@ -64,4 +66,15 @@ func (m *PathHttpInterceptorMiddleware) Handle(next http.HandlerFunc) http.Handl
 		r = r.WithContext(ctx)
 		next(w, r)
 	}
+}
+
+func ipType(ipStr string) string {
+	ip := net.ParseIP(ipStr)
+	if ip == nil {
+		return "invalid"
+	}
+	if ip.To4() != nil {
+		return "IPv4"
+	}
+	return "IPv6"
 }
