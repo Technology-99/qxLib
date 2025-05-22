@@ -15,6 +15,8 @@ const (
 	CtxRequestID       = "RequestID"
 	CtxTenantId        = "TenantId"
 	CtxDomainId        = "DomainId"
+	CtxUserId          = "UserId"
+	CtxRole            = "Role"
 	CtxClaimsAudience  = "Audience"
 	CtxClaimsExpiresAt = "ExpiresAt"
 	CtxClaimsId        = "Id"
