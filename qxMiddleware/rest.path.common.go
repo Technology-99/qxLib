@@ -37,7 +37,7 @@ func (m *PathHttpInterceptorMiddleware) Handle(next http.HandlerFunc) http.Handl
 			http.Error(w, "unknown ip format", http.StatusNotImplemented)
 			return
 		}
-		logc.Infof(ctx, "realAddr: %s, ip: %s, port: %s, ipType: %s, err: %s", realAddr, ip, port, ipType, err)
+		logc.Infof(ctx, "realAddr: %s, ip: %s, port: %s, ipType: %s", realAddr, ip, port, ipType)
 
 		ctx = context.WithValue(ctx, CtxClientIp, ip)
 		ctx = context.WithValue(ctx, CtxClientPort, port)
@@ -99,8 +99,6 @@ func returnIpAndPort(ipStr string) (ip, port, ipType string, err error) {
 			port = ""
 		}
 	}
-
-	logx.Infof("ip: %s, port: %s", ip, port)
 
 	// 解析 IP
 	netIp := net.ParseIP(strings.Trim(ip, "[]"))
