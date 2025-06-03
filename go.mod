@@ -10,7 +10,6 @@ require (
 	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.70
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.79.0
 	github.com/aws/smithy-go v1.22.2
-	github.com/awsdocs/aws-doc-sdk-examples/gov2/demotools v0.0.0-20250401205422-3889a34536aa
 	github.com/billcobbler/casbin-redis-watcher/v2 v2.0.0-20211014141847-d29c8619193d
 	github.com/bwmarrin/snowflake v0.3.0
 	github.com/casbin/casbin/v2 v2.103.0
@@ -19,6 +18,7 @@ require (
 	github.com/go-playground/validator/v10 v10.14.0
 	github.com/go-sql-driver/mysql v1.9.0
 	github.com/golang-jwt/jwt/v4 v4.5.1
+	github.com/google/uuid v1.6.0
 	github.com/lionsoul2014/ip2region v2.11.2+incompatible
 	github.com/redis/go-redis/v9 v9.7.1
 	github.com/robfig/cron/v3 v3.0.1
@@ -66,7 +66,6 @@ require (
 	github.com/goccy/go-json v0.10.2 // indirect
 	github.com/golang-sql/civil v0.0.0-20220223132316-b832511892a9 // indirect
 	github.com/golang-sql/sqlexp v0.1.0 // indirect
-	github.com/google/uuid v1.6.0 // indirect
 	github.com/hashicorp/golang-lru v0.5.4 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761 // indirect
@@ -96,7 +95,6 @@ require (
 	golang.org/x/net v0.35.0 // indirect
 	golang.org/x/sync v0.12.0 // indirect
 	golang.org/x/sys v0.31.0 // indirect
-	golang.org/x/term v0.30.0 // indirect
 	golang.org/x/text v0.23.0 // indirect
 	golang.org/x/time v0.10.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240701130421-f6361c86f094 // indirect
