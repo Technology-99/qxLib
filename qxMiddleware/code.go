@@ -14,6 +14,7 @@ const (
 	CtxRequestURI      = "RequestURI"
 	CtxRequestID       = "RequestID"
 	CtxTenantId        = "TenantId"
+	CtxTenants         = "Tenants"
 	CtxDomainId        = "DomainId"
 	CtxUserId          = "UserId"
 	CtxRole            = "Role"
