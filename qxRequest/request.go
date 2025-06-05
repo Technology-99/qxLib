@@ -22,6 +22,7 @@ type (
 		Post(url, contentType string, body io.Reader) (resp *http.Response, err error)
 		PostSyncJson(url string, sendBody interface{}) func() ([]byte, error)
 		PostSyncJsonWithHeaders(url string, sendBody interface{}, headers map[string]string) func() ([]byte, error)
+		PostSyncJsonBodyWithHeaders(url string, jsonBody string, headers map[string]string) func() ([]byte, error)
 		PostSyncJsonWithFile(url string, fileFieldName, fileName string, file io.Reader, fields map[string]string) func() ([]byte, error)
 		Put(url, contentType string, body io.Reader) (resp *http.Response, err error)
 		PutSyncJson(url string, sendBody interface{}) func() ([]byte, error)
@@ -172,6 +173,45 @@ func (c *requestClient) PostSyncJsonWithHeaders(url string, sendBody interface{}
 		}
 
 		req, err := http.NewRequest(http.MethodPost, url, bytes.NewBuffer(sendBodyBt))
+		if err != nil {
+			fmt.Println("Error creating request:", err)
+			return
+		}
+		req.Header.Set("Content-Type", "application/json")
+		for key, val := range headers {
+			req.Header.Set(key, val)
+		}
+
+		var res *http.Response
+		res, err = c.client.Do(req)
+		if err != nil {
+			fmt.Println("Error sending request:", err)
+			return
+		}
+
+		defer res.Body.Close()
+		body, err = ioutil.ReadAll(res.Body)
+		return
+	}()
+	return func() ([]byte, error) {
+		_, ok := <-ch
+		if !ok {
+			//fmt.Println("channel closed!")
+			return body, err
+		}
+		return body, err
+	}
+}
+
+func (c *requestClient) PostSyncJsonBodyWithHeaders(url string, jsonBody string, headers map[string]string) func() ([]byte, error) {
+	var body []byte
+	var err error
+
+	ch := make(chan struct{}, 1)
+	go func() {
+		defer close(ch)
+
+		req, err := http.NewRequest(http.MethodPost, url, bytes.NewBuffer([]byte(jsonBody)))
 		if err != nil {
 			fmt.Println("Error creating request:", err)
 			return
