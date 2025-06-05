@@ -16,11 +16,12 @@ require (
 	github.com/casbin/gorm-adapter/v3 v3.32.0
 	github.com/gin-gonic/gin v1.9.1
 	github.com/go-playground/validator/v10 v10.14.0
+	github.com/go-redsync/redsync/v4 v4.13.0
 	github.com/go-sql-driver/mysql v1.9.0
-	github.com/golang-jwt/jwt/v4 v4.5.1
+	github.com/golang-jwt/jwt/v4 v4.5.2
 	github.com/google/uuid v1.6.0
 	github.com/lionsoul2014/ip2region v2.11.2+incompatible
-	github.com/redis/go-redis/v9 v9.7.1
+	github.com/redis/go-redis/v9 v9.7.2
 	github.com/robfig/cron/v3 v3.0.1
 	github.com/sony/sonyflake v1.2.0
 	github.com/ua-parser/uap-go v0.0.0-20250213224047-9c035f085b90
@@ -63,7 +64,6 @@ require (
 	github.com/glebarez/sqlite v1.7.0 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
-	github.com/go-redsync/redsync/v4 v4.13.0 // indirect
 	github.com/goccy/go-json v0.10.2 // indirect
 	github.com/golang-sql/civil v0.0.0-20220223132316-b832511892a9 // indirect
 	github.com/golang-sql/sqlexp v0.1.0 // indirect
@@ -95,7 +95,7 @@ require (
 	go.opentelemetry.io/otel/trace v1.24.0 // indirect
 	go.uber.org/automaxprocs v1.6.0 // indirect
 	golang.org/x/arch v0.3.0 // indirect
-	golang.org/x/net v0.35.0 // indirect
+	golang.org/x/net v0.38.0 // indirect
 	golang.org/x/sync v0.12.0 // indirect
 	golang.org/x/sys v0.31.0 // indirect
 	golang.org/x/text v0.23.0 // indirect
