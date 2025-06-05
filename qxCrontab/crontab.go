@@ -16,10 +16,11 @@ type Crontab struct {
 }
 
 type Task struct {
-	Name  string
-	Spec  string
-	JobId cron.EntryID
-	Job   cron.Job
+	TaskId string // note: 最好用uuid
+	Name   string
+	Spec   string
+	JobId  cron.EntryID
+	Job    cron.Job
 }
 
 func New() *Crontab {
@@ -49,24 +50,24 @@ func (c *Crontab) Run() {
 			c.Lock.Lock()
 			jobId, err := c.AddJob(task.Spec, task.Job)
 			if err != nil {
-				logx.Errorf("task register failed, and task name = %s, and task ID = %d", task.Name, task.JobId)
+				logx.Errorf("task register failed, and task id = %s, task name = %s, and task ID = %d", task.TaskId, task.Name, task.JobId)
 				return
 			}
 			task.JobId = jobId
-			c.TaskPool[task.Name] = task
+			c.TaskPool[task.TaskId] = task
 			c.TaskCount += 1
 			c.Lock.Unlock()
-			logx.Infof("task register success, and task name = %s, and task ID = %d", task.Name, task.JobId)
+			logx.Infof("task register success, and task id = %s, task name = %s, and task ID = %d", task.TaskId, task.Name, task.JobId)
 		case task := <-c.UnRegister:
 			//注销客户端
 			c.Lock.Lock()
-			if _, ok := c.TaskPool[task.Name]; ok {
+			if _, ok := c.TaskPool[task.TaskId]; ok {
 				c.Remove(task.JobId)
-				//删除分组中客户
-				delete(c.TaskPool, task.Name)
+				//删除分组中的任务
+				delete(c.TaskPool, task.TaskId)
 				//任务数量减1
 				c.TaskCount -= 1
-				logx.Infof("task unregister success, and task name = %s, and task ID = %d", task.Name, task.JobId)
+				logx.Infof("task unregister success, and task id = %s, task name = %s, and task ID = %d", task.TaskId, task.Name, task.JobId)
 			}
 			c.Lock.Unlock()
 		}
