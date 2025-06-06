@@ -52,6 +52,7 @@ func (c *CrontabPool) Run() {
 			c.Lock.Lock()
 			// note: 如果任务已经存在，则不再注册，但是万一需要更新，这个需要改进
 			if _, ok := c.TaskPool[task.TaskUuid]; ok {
+				logx.Infof("task already exists, and task uuid = %s, task name = %s, and task ID = %d", task.TaskUuid, task.Name, task.JobId)
 				return
 			}
 			jobId, err := c.AddJob(task.Spec, task.Job)
