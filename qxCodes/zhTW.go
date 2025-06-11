@@ -233,6 +233,7 @@ var WrongMessageZhTW = map[int32]string{
 	BsStatusOauth2ClientSecretNotMatch:          "client密钥错误",
 	BsStatusOauth2ClientIdDisabled:              "clientId已经被禁用",
 	BsStatusCodeInvalid:                         "验证码错误",
+	BsStatusPermissionDenied:                    "permission denied",
 	BsStatusInternalServerError:                 "服务器内部错误，无法完成请求",
 	BsStatusNotImplemented:                      "服务器不支持请求的功能，无法完成请求",
 	BsStatusBadGateway:                          "作为网关或者代理工作的服务器尝试执行请求时，从远程服务器接收到了一个无效的响应",
