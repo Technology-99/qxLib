@@ -2,6 +2,12 @@ module github.com/Technology-99/qxLib
 
 go 1.23.0
 
+replace github.com/golang/glog => github.com/golang/glog v1.2.4
+
+replace github.com/golang-jwt/jwt/v5 => github.com/golang-jwt/jwt/v5 v5.2.2
+
+replace golang.org/x/oauth2 => golang.org/x/oauth2 v0.30.0
+
 require (
 	github.com/aliyun/aliyun-oss-go-sdk v3.0.2+incompatible
 	github.com/aws/aws-sdk-go-v2 v1.36.3
@@ -31,7 +37,7 @@ require (
 	google.golang.org/protobuf v1.36.5
 	gorm.io/driver/mysql v1.5.7
 	gorm.io/driver/postgres v1.5.11
-	gorm.io/gorm v1.25.12
+	gorm.io/gorm v1.30.0
 )
 
 require (
